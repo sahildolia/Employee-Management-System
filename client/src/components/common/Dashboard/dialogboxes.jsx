@@ -28,6 +28,7 @@ import {
     CommandShortcut,
 } from "@/components/ui/command"
 import { fetchEmployeesIDs } from "../../../redux/Thunks/EmployeesIDsThunk.js"
+import AddEmpModal from "./AddEmpModal.jsx";
 
 
 export const AddEmployeesDialogBox = () => {
@@ -48,8 +49,18 @@ export const AddEmployeesDialogBox = () => {
     return (
         <div className="AddEmployees-content">
             <Dialog>
-                <DialogTrigger className="bg-blue-800 border-2 border-blue-800 md:px-4 md:py-2 md:text-lg min-[250px]:px-2 min-[250px]:py-1 min-[250px]:text-sm text-white font-bold rounded-lg hover:bg-white hover:text-blue-800">Add Employees</DialogTrigger>
-                <DialogContent className="max-w-[315px] sm:max-w-[50vw] 2xl:max-w-[45vw]">
+                <DialogTrigger  className="
+              bg-white
+              text-blue-600
+              font-medium
+              px-4
+              py-2
+              rounded-xl
+              hover:shadow-lg
+              transition
+            ">Add Employees</DialogTrigger>
+             <AddEmpModal formdata={formdata} handleformchange={handleformchange}/>
+                {/* <DialogContent className="max-w-[315px] sm:max-w-[50vw] 2xl:max-w-[45vw]">
                     <div className="add-employees-container flex flex-col gap-5">
                         <div className="heading">
                             <h1 className="font-bold text-2xl">Add Employee Info</h1>
@@ -114,7 +125,8 @@ export const AddEmployeesDialogBox = () => {
                             <FormSubmitToast formdata={formdata} />
                         </div>
                     </div>
-                </DialogContent>
+                </DialogContent> */}
+               
             </Dialog>
         </div>
     )
@@ -256,7 +268,7 @@ export const CreateDepartmentDialogBox = () => {
 
     return (
         <Dialog>
-            <DialogTrigger className="min-[250px]:text-sm sm:text-lg min-[250px]:px-2 min-[250px]:py-1 sm:px-4 sm:py-2 bg-blue-700 font-bold text-white rounded-lg border-2 border-blue-700 hover:bg-white hover:text-blue-700">Create Department</DialogTrigger>
+            <DialogTrigger className="min-[250px]:text-sm sm:text-lg min-[250px]:px-2 min-[250px]:py-1 sm:px-4 sm:py-2 bg-blue-700 font-bold text-white rounded-lg border-2 primary1 hover:bg-white hover:text-blue-700">Create Department</DialogTrigger>
             <DialogContent className="max-w-[315px] lg:max-w-[35vw] 2xl:max-w-[30vw]">
                 <div className="create-department-container flex flex-col gap-4">
                     <div className="create-department-heading">
@@ -287,9 +299,9 @@ export const CreateDepartmentDialogBox = () => {
                         </div>
                         <div className="create-department-button flex justify-center items-center">
                             {
-                                (formdata.name.trim().length === 0 || formdata.description.trim().length === 0) ? <Button className="btn-sm btn-blue-700 text-md border-2 bg-blue-700 border-blue-700 px-2 py-1 rounded-md hover:bg-white hover:text-blue-700" onClick={() => ShowToast()}>Create</Button> :
+                                (formdata.name.trim().length === 0 || formdata.description.trim().length === 0) ? <Button className="btn-sm btn-blue-700 text-md border-2 bg-blue-700 primary1 px-2 py-1 rounded-md hover:bg-white hover:text-blue-700" onClick={() => ShowToast()}>Create</Button> :
                                     <DialogClose asChild>
-                                        <Button className="btn-sm btn-blue-700 text-md border-2 bg-blue-700 border-blue-700 px-2 py-1 rounded-md hover:bg-white hover:text-blue-700" onClick={() => CreateDepartment()}>Create</Button>
+                                        <Button className="btn-sm btn-blue-700 text-md border-2 bg-blue-700 primary1 px-2 py-1 rounded-md hover:bg-white hover:text-blue-700" onClick={() => CreateDepartment()}>Create</Button>
                                     </DialogClose>
                             }
                         </div>
@@ -369,9 +381,9 @@ export const EmployeesIDSDialogBox = ({ DepartmentID }) => {
                             </Command>
                         </div>
                         <div className="employeeID-checkbox-button-group flex justify-center items-center gap-2">
-                            <Button className="btn-sm btn-blue-700 text-md border-2 bg-blue-700 border-blue-700 px-2 py-1 rounded-lg hover:bg-white hover:text-blue-700" onClick={() => SetEmployees()}>Add</Button>
+                            <Button className="btn-sm btn-blue-700 text-md border-2 bg-blue-700 primary1 px-2 py-1 rounded-lg hover:bg-white hover:text-blue-700" onClick={() => SetEmployees()}>Add</Button>
                             <DialogClose asChild>
-                                <Button className="btn-sm btn-blue-700 text-md border-2 bg-blue-700 border-blue-700 px-2 py-1 rounded-lg hover:bg-white hover:text-blue-700" onClick={() => ClearSelectedEmployeesData()}>Cancel</Button>
+                                <Button className="btn-sm btn-blue-700 text-md border-2 bg-blue-700 primary1 px-2 py-1 rounded-lg hover:bg-white hover:text-blue-700" onClick={() => ClearSelectedEmployeesData()}>Cancel</Button>
                             </DialogClose>
                         </div>
                     </div>}

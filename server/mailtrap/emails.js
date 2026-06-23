@@ -1,14 +1,14 @@
 import { VERIFICATION_EMAIL_TEMPLATE, PASSWORD_RESET_REQUEST_TEMPLATE, PASSWORD_RESET_SUCCESS_TEMPLATE } from "./emailtemplates.js"
 import { Emailclient, sender } from "./mailtrap.config.js"
 
-export const SendVerificationEmail = async (email, verificationcode) => {
+export const SendVerificationEmail = async (email) => {
     const receiver = [{ email }]
     try {
         const response = await Emailclient.send({
             from: sender,
             to: receiver,
             subject: "Verify your email",
-            html: VERIFICATION_EMAIL_TEMPLATE.replace("{verificationCode}", verificationcode),
+            // html: VERIFICATION_EMAIL_TEMPLATE.replace("{verificationCode}", verificationcode),
             category: "Email verification"
         })
         // console.log("Verification email sent successfully", response)

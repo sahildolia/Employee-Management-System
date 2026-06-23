@@ -29,7 +29,7 @@ export const HandleEmplyoeeSignup = async (req, res) => {
             // }
 
             const hashedPassword = await bcrypt.hash(password, 10)
-            const verificationcode = GenerateVerificationToken(6)
+            // const verificationcode = GenerateVerificationToken(6)
 
             const newEmployee = await Employee.create({
                 firstname: firstname,
@@ -38,8 +38,8 @@ export const HandleEmplyoeeSignup = async (req, res) => {
                 password: hashedPassword,
                 contactnumber: contactnumber,
                 role: "Employee",
-                verificationtoken: verificationcode,
-                verificationtokenexpires: Date.now() + 5 * 60 * 1000,
+                // verificationtoken: verificationcode,
+                // verificationtokenexpires: Date.now() + 5 * 60 * 1000,
                 organizationID: organization._id
             })
 
@@ -63,10 +63,10 @@ export const HandleEmplyoeeSignup = async (req, res) => {
 }
 
 export const HandleEmplyoeeVerifyEmail = async (req, res) => {
-    const { verificationcode } = req.body
+    // const { verificationcode } = req.body
 
     try {
-        const ValidateEmployee = await Employee.findOne({ verificationtoken: verificationcode, verificationtokenexpires: { $gt: Date.now() }, organizationID: req.ORGID })
+        // const ValidateEmployee = await Employee.findOne({ verificationtoken: verificationcode, verificationtokenexpires: { $gt: Date.now() }, organizationID: req.ORGID })
 
         if (!ValidateEmployee) {
             return res.status(404).json({ success: false, message: "Invalid or Expired Verifiation Code" })
@@ -100,12 +100,12 @@ export const HandleResetEmplyoeeVerifyEmail = async (req, res) => {
             return res.status(404).json({ success: false, message: "Employee Email Already verified" })
         }
 
-        const verificationcode = GenerateVerificationToken(6)
-        employee.verificationtoken = verificationcode
-        employee.verificationtokenexpires = Date.now() + 5 * 60 * 1000
+        // const verificationcode = GenerateVerificationToken(6)
+        // employee.verificationtoken = verificationcode
+        // employee.verificationtokenexpires = Date.now() + 5 * 60 * 1000
         await employee.save()
 
-        const SendVerificationEmailStatus = await SendVerificationEmail(email, verificationcode)
+        // const SendVerificationEmailStatus = await SendVerificationEmail(email, verificationcode)
         return res.status(200).json({ success: true, message: "Verification email sent successfully", SendVerificationEmailStatus: SendVerificationEmailStatus })
 
     } catch (error) {

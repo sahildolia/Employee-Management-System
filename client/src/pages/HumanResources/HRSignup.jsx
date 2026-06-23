@@ -61,7 +61,8 @@ export const HRSignupPage = () => {
 
         if (HRState.isAuthenticated && !HRState.isVerified) {
             loadingbar.current.complete()
-            navigate("/auth/HR/verify-email")
+            // navigate("/auth/HR/verify-email")
+            navigate("/HR/dashboard/dashboard-data")
         }
     }, [HRState.isAuthenticated, HRState.isVerified])
 

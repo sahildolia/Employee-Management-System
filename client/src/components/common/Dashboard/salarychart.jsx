@@ -18,7 +18,7 @@ import {
 export const SalaryChart = ({ balancedata }) => {
     const chartData = []
     if (balancedata) {
-        for (let index = 0; index < balancedata.balance.length; index++) {
+        for (let index = 0; index < balancedata?.balance?.length; index++) {
             chartData.push(
                 {
                     month: balancedata.balance[index]["expensemonth"],
@@ -41,10 +41,20 @@ export const SalaryChart = ({ balancedata }) => {
 
     let trendingUp = 0
 
-    if (balancedata) {
-        const difference = chartData[chartData.length - 1]["AvailableAmount"] - chartData[chartData.length - 2]["AvailableAmount"]
-        trendingUp += Math.round((difference * 100) / chartData[chartData.length - 2]["AvailableAmount"])
-    }
+    // if (balancedata) {
+    //     const difference = chartData[chartData.length - 1]["AvailableAmount"] - chartData[chartData.length - 2]["AvailableAmount"]
+    //     trendingUp += Math.round((difference * 100) / chartData[chartData.length - 2]["AvailableAmount"])
+    // }
+    if (chartData.length >= 2) {
+    const difference =
+        chartData[chartData.length - 1].AvailableAmount -
+        chartData[chartData.length - 2].AvailableAmount
+
+    trendingUp = Math.round(
+        (difference * 100) /
+        chartData[chartData.length - 2].AvailableAmount
+    )
+}
     return (
         <div className="salary-container flex flex-col min-[250px]:gap-3 sm:gap-1 h-auto">
             <div className="heading px-2 my-2 min-[250px]:px-3">
