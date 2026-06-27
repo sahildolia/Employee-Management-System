@@ -47,7 +47,7 @@ export const HandleCreateSalary = async (req, res) => {
         employee.salary.push(salary._id)
         await employee.save()
 
-        return res.status(200).json({ success: true, message: "Salary created successfully", data: salary })
+        return res.status(200).json({ success: true, message: "Salary created successfully", data: salary, type: "SalaryCreate" })
 
     } catch (error) {
         return res.status(500).json({ success: false, message: error.message })
@@ -57,7 +57,7 @@ export const HandleCreateSalary = async (req, res) => {
 export const HandleAllSalary = async (req, res) => {
     try {
         const salary = await Salary.find({ organizationID: req.ORGID }).populate("employee", "firstname lastname department")
-        return res.status(200).json({ success: true, message: "All salary records retrieved successfully", data: salary })
+        return res.status(200).json({ success: true, message: "All salary records retrieved successfully", data: salary, type: "AllSalary" })
 
     } catch (error) {
         return res.status(500).json({ success: false, error: error, message: "Internal Server Error" })
@@ -96,10 +96,19 @@ export const HandleUpdateSalary = async (req, res) => {
             return res.status(404).send({ success: false, message: "Salary record does not found" })
         }
 
-        return res.status(200).json({ success: true, message: "Salary updated successfully", data: salary })
+        return res.status(200).json({ success: true, message: "Salary updated successfully", data: salary, type: "SalaryUpdate" })
 
     } catch (error) {
         return res.status(500).json({ success: false, message: "Something went wrong", error: error })
+    }
+}
+
+export const HandleMySalary = async (req, res) => {
+    try {
+        const salary = await Salary.find({ employee: req.EMid, organizationID: req.ORGID }).populate("employee", "firstname lastname")
+        return res.status(200).json({ success: true, message: "My salary records retrieved successfully", data: salary, type: "MySalary" })
+    } catch (error) {
+        return res.status(500).json({ success: false, message: "Internal Server Error", error: error })
     }
 }
 
@@ -118,7 +127,7 @@ export const HandleDeleteSalary = async (req, res) => {
         await employee.save()
         await salary.deleteOne()
 
-        return res.status(200).json({ success: true, message: "Salary deleted successfully" })
+        return res.status(200).json({ success: true, message: "Salary deleted successfully", type: "SalaryDelete" })
 
     } catch (error) {
         console.log(error)

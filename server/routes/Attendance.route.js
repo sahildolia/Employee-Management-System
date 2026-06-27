@@ -1,5 +1,5 @@
 import express from 'express'
-import { HandleInitializeAttendance, HandleAllAttendance, HandleAttendance, HandleUpdateAttendance, HandleDeleteAttendance } from '../controllers/Attendance.controller.js'
+import { HandleInitializeAttendance, HandleAllAttendance, HandleAttendance, HandleUpdateAttendance, HandleMyAttendance, HandleDeleteAttendance } from '../controllers/Attendance.controller.js'
 import { VerifyEmployeeToken, VerifyhHRToken } from '../middlewares/Auth.middleware.js'
 import { RoleAuthorization } from '../middlewares/RoleAuth.middleware.js'
 
@@ -9,9 +9,11 @@ router.post("/initialize", VerifyEmployeeToken, HandleInitializeAttendance)
 
 router.get("/all", VerifyhHRToken, RoleAuthorization("HR-Admin"), HandleAllAttendance)
 
+router.get("/my-attendance", VerifyEmployeeToken, HandleMyAttendance)
+
 router.get("/:attendanceID", VerifyhHRToken, RoleAuthorization("HR-Admin"), HandleAttendance)
 
-router.patch("/update-attendance", VerifyEmployeeToken, HandleUpdateAttendance)
+router.post("/update-attendance", VerifyEmployeeToken, HandleUpdateAttendance)
 
 router.delete("/delete-attendance/:attendanceID", VerifyhHRToken, RoleAuthorization("HR-Admin"), HandleDeleteAttendance)
 

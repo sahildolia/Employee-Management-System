@@ -1,11 +1,16 @@
 import { EmployeeLogin } from "../pages/Employees/emplyoeelogin.jsx"
-import { EmployeeDashboard } from "../pages/Employees/employeedashboard.jsx"
+import { EmployeeLayout } from "../pages/Employees/EmployeeLayout.jsx"
 import { ProtectedRoutes } from "./protectedroutes.jsx"
 import { ForgotPassword } from "../pages/Employees/forgotpassword.jsx"
 import { ResetEmailConfirm } from "../pages/Employees/resetemailconfirm.jsx"
 import { ResetPassword } from "../pages/Employees/resetpassword.jsx"
 import { EntryPage } from "../pages/Employees/EntryPage.jsx"
-// import { VerifyEmailPage } from "../pages/common/verifyemailpage.jsx"
+import { EmployeeDashboard } from "../pages/Employees/employeedashboard.jsx"
+import { EmpLeavesPage } from "../pages/Employees/EmpLeavespage.jsx"
+import { EmployeeSalaryPage } from "../pages/Employees/salarypage.jsx"
+import { AttendancePage } from "../pages/Employees/attendancepage.jsx"
+import { NoticesPage } from "../pages/Employees/noticespage.jsx"
+import { ProfilePage } from "../pages/Employees/profilepage.jsx"
 
 export const EmployeeRoutes = [
     {
@@ -15,14 +20,6 @@ export const EmployeeRoutes = [
     {
         path: "/auth/employee/login",
         element: <EmployeeLogin />
-    },
-    // {
-    //     path: "/auth/employee/verify-email", 
-    //     element: <VerifyEmailPage />
-    // },
-    {
-        path: "/auth/employee/employee-dashboard",
-        element: <ProtectedRoutes> <EmployeeDashboard /> </ProtectedRoutes>
     },
     {
         path: "/auth/employee/forgot-password",
@@ -34,7 +31,36 @@ export const EmployeeRoutes = [
     },
     {
         path: "/auth/employee/resetpassword/:token",
-        element: <ResetPassword /> 
+        element: <ResetPassword />
     },
+    {
+        path: "/employee/dashboard",
+        element: <ProtectedRoutes><EmployeeLayout /></ProtectedRoutes>,
+        children: [
+            {
+                path: "/employee/dashboard/dashboard-data",
+                element: <EmployeeDashboard />
+            },
+            {
+                path: "/employee/dashboard/leaves",
+                element: <EmpLeavesPage />
+            },
+            {
+                path: "/employee/dashboard/salary",
+                element: <EmployeeSalaryPage />
+            },
+            {
+                path: "/employee/dashboard/attendance",
+                element: <AttendancePage />
+            },
+            {
+                path: "/employee/dashboard/notices",
+                element: <NoticesPage />
+            },
+            {
+                path: "/employee/dashboard/profile",
+                element: <ProfilePage />
+            }
+        ]
+    }
 ]
-

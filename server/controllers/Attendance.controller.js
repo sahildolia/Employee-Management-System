@@ -37,7 +37,7 @@ export const HandleInitializeAttendance = async (req, res) => {
         await employee.save()
         await newAttendance.save()
 
-        return res.status(200).json({ success: true, message: "Attendance Log Initialized Successfully", data: newAttendance })
+        return res.status(200).json({ success: true, message: "Attendance Log Initialized Successfully", data: newAttendance, type: "AttendanceCreate" })
 
     } catch (error) {
         return res.status(500).json({ success: false, message: "Internal Server Error", error: error })
@@ -47,7 +47,7 @@ export const HandleInitializeAttendance = async (req, res) => {
 export const HandleAllAttendance = async (req, res) => {
     try {
         const attendance = await Attendance.find({ organizationID: req.ORGID }).populate("employee", "firstname lastname department")
-        return res.status(200).json({ success: true, message: "All attendance records retrieved successfully", data: attendance })
+        return res.status(200).json({ success: true, message: "All attendance records retrieved successfully", data: attendance, type: "AllAttendance" })
     } catch (error) {
         return res.status(500).json({ success: false, message: "Internal Server Error", error: error })
     }
@@ -104,6 +104,18 @@ export const HandleUpdateAttendance = async (req, res) => {
     }
 }
 
+export const HandleMyAttendance = async (req, res) => {
+    try {
+        const attendance = await Attendance.findOne({ employee: req.EMid, organizationID: req.ORGID }).populate("employee", "firstname lastname")
+        if (!attendance) {
+            return res.status(404).json({ success: false, message: "Attendance record not found", type: "MyAttendance" })
+        }
+        return res.status(200).json({ success: true, message: "Attendance record retrieved successfully", data: attendance, type: "MyAttendance" })
+    } catch (error) {
+        return res.status(500).json({ success: false, message: "Internal Server Error", error: error })
+    }
+}
+
 export const HandleDeleteAttendance = async (req, res) => {
     try {
         const { attendanceID } = req.params
@@ -119,7 +131,7 @@ export const HandleDeleteAttendance = async (req, res) => {
         await employee.save()
         await attendance.deleteOne()
 
-        return res.status(200).json({ success: true, message: "Attendance record deleted successfully" })
+        return res.status(200).json({ success: true, message: "Attendance record deleted successfully", type: "AttendanceDelete" })
     } catch (error) {
         return res.status(500).json({ success: false, message: "Internal Server Error", error: error })
     }

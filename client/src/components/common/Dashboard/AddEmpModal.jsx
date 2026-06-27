@@ -3,7 +3,7 @@ import { FormSubmitToast } from "./Toasts.jsx"
 const AddEmpModal = ({formdata, handleformchange, }) => {
   return (
    <>
-                   <DialogContent className="max-w-[315px] sm:max-w-[50vw] 2xl:max-w-[45vw]">
+                    <DialogContent className="max-w-[90vw] sm:max-w-[50vw] 2xl:max-w-[45vw]">
                     <div className="add-employees-container flex flex-col gap-5">
                         <div className="heading">
                             <h1 className="font-bold text-2xl">Add Employee Info</h1>

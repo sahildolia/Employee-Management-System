@@ -107,7 +107,7 @@ export const HRDepartmentTabs = () => {
     }
 
     return (
-        <div className="flex flex-col gap-4 bg-blue-50 min-[250px]:p-1 sm:p-4 rounded-lg h-[100%] overflow-auto">
+        <div className="flex flex-col gap-4 bg-blue-50 min-[250px]:p-1 sm:p-4 rounded-lg min-h-0 flex-1 overflow-auto">
             <div className="Dropdown-container flex justify-between items-center">
                 <div className="drop-down-select flex items-center gap-2 min-[250px]:flex-col sm:flex-row">
                     <h1 className="font-bold sm:text-sm lg:text-lg min-[250px]:hidden sm:flex">Department : </h1>
@@ -137,7 +137,7 @@ export const HRDepartmentTabs = () => {
                         </DropdownMenu> : null}
                 </div>
             </div>
-            <div className={`department-container min-[250px]:px-1 sm:px-4 rounded-lg flex flex-col gap-4 h-[100%]`}>
+            <div className={`department-container min-[250px]:px-1 sm:px-4 rounded-lg flex flex-col gap-4 min-h-0 flex-1`}>
                 {
                     department === "All Departments" ? <AllDepartments DepartmentData={HRDepartmentState} SetCurrentDepartment={setdepartment} /> :
                         <DepartmentContent CurrentDepartmentData={HRDepartmentState.data ? HRDepartmentState.data.find((item) => item.name == department) : null} />
@@ -214,7 +214,7 @@ export const DepartmentContent = ({ CurrentDepartmentData }) => {
                     {CurrentDepartmentData.description}
                 </p>
             </div>
-            <Tabs defaultValue="account" className="w-full h-[100%]">
+            <Tabs defaultValue="account" className="w-full min-h-0 flex-1 flex flex-col">
                 <div className="tabs-with-button flex justify-between items-center min-[250px]:flex-col-reverse sm:flex-row">
                     <TabsList className="min-[250px]:max-w-[250px] md:max-w-[300px] bg-blue-200 text-blue-700 my-3 min-[250px]:flex min-[250px]:flex-col min-[250px]:py-14 min-[350px]:flex min-[350px]:flex-row min-[350px]:py-6">
                         <TabsTrigger value="account" className="px-4 py-2 font-bold m-2 min-[250px]:text-xs md:text-sm">
@@ -228,11 +228,11 @@ export const DepartmentContent = ({ CurrentDepartmentData }) => {
                         <EmployeesIDSDialogBox DepartmentID={CurrentDepartmentData._id} />
                     </div>
                 </div>
-                <TabsContent value="account" className={`border-2 border-blue-500 rounded-lg min-[250px]:h-[100%] md:h-[85%] min-[1650px]:h-[90%] overflow-auto p-2`}>
+                <TabsContent value="account" className={`border-2 border-blue-500 rounded-lg overflow-auto p-2 flex-1 min-h-0`}>
                     <HeadingBar table_layout={"grid-cols-4"} table_headings={table_headings_employees} />
                     <DepartmentListItems TargetedState={CurrentDepartmentData} />
                 </TabsContent>
-                <TabsContent value="password" className={`border-2 border-blue-500 rounded-lg min-[250px]:h-[100%] md:h-[85%] min-[1650px]:h-[90%] overflow-auto p-2`}>
+                <TabsContent value="password" className={`border-2 border-blue-500 rounded-lg overflow-auto p-2 flex-1 min-h-0`}>
                     <HeadingBar table_layout={"grid-cols-4"} table_headings={table_headings_notice} />
                 </TabsContent>
             </Tabs>

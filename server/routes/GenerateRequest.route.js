@@ -1,5 +1,5 @@
 import express from 'express'
-import { HandleAllGenerateRequest, HandleCreateGenerateRequest, HandleDeleteRequest, HandleGenerateRequest, HandleUpdateRequestByEmployee, HandleUpdateRequestByHR } from '../controllers/GenerateRequest.controller.js'
+import { HandleAllGenerateRequest, HandleCreateGenerateRequest, HandleMyRequests, HandleDeleteRequest, HandleGenerateRequest, HandleUpdateRequestByEmployee, HandleUpdateRequestByHR } from '../controllers/GenerateRequest.controller.js'
 
 import { VerifyEmployeeToken, VerifyhHRToken } from '../middlewares/Auth.middleware.js'
 import { RoleAuthorization } from '../middlewares/RoleAuth.middleware.js'
@@ -8,6 +8,8 @@ const router = express.Router()
 
 
 router.post("/create-request", VerifyEmployeeToken, HandleCreateGenerateRequest)
+
+router.get("/my-requests", VerifyEmployeeToken, HandleMyRequests)
 
 router.get("/all", VerifyhHRToken, RoleAuthorization("HR-Admin"), HandleAllGenerateRequest)
 

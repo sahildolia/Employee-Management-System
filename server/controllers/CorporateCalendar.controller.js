@@ -23,7 +23,7 @@ export const HandleCreateEvent = async (req, res) => {
             organizationID: req.ORGID
         })
 
-        return res.status(200).json({ success: true, message: "Event created successfully", data: newEvent })
+        return res.status(200).json({ success: true, message: "Event created successfully", data: newEvent, type: "EventCreate" })
     } catch (error) {
         return res.status(500).json({ success: false, message: "Internal Server Error", error: error })
     }
@@ -32,7 +32,7 @@ export const HandleCreateEvent = async (req, res) => {
 export const HandleAllEvents = async (req, res) => {
     try {
         const events = await CorporateCalendar.find({ organizationID: req.ORGID })
-        return res.status(200).json({ success: true, message: "All events retrieved successfully", data: events })
+        return res.status(200).json({ success: true, message: "All events retrieved successfully", data: events, type: "AllEvents" })
     } catch (error) {
         return res.status(500).json({ success: false, message: "Internal Server Error", error: error })
     }
@@ -62,7 +62,7 @@ export const HandleUpdateEvent = async (req, res) => {
             return res.status(404).json({ success: false, message: "Event not found" })
         }
 
-        return res.status(200).json({ success: true, message: "Event updated successfully", data: event })
+        return res.status(200).json({ success: true, message: "Event updated successfully", data: event, type: "EventUpdate" })
     }
     catch (error) {
         return res.status(500).json({ success: false, message: "Internal Server Error", error: error })
@@ -79,7 +79,7 @@ export const HandleDeleteEvent = async (req, res) => {
             return res.status(404).json({ success: false, message: "Event not found" })
         }
 
-        return res.status(200).json({ success: true, message: "Event deleted successfully" })
+        return res.status(200).json({ success: true, message: "Event deleted successfully", type: "EventDelete" })
     }
     catch (error) {
         return res.status(500).json({ success: false, message: "Internal Server Error", error: error })

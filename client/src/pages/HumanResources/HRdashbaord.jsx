@@ -30,7 +30,7 @@ export const HRDashbaord = () => {
                     </div>
                 </SidebarProvider>
             </div>
-            <div className="HRdashboard-container h-screen w-full min-[250px]:mx-1 md:mx-2 flex flex-col">
+            <div className="HRdashboard-container h-screen w-full min-[250px]:mx-1 md:mx-2 flex flex-col min-[250px]:ps-10 md:ps-0">
                 <Outlet />
             </div>
         </div>

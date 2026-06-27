@@ -14,7 +14,9 @@ import {
 import { HandleGetDashboard } from "../../../redux/Thunks/DashboardThunk.js";
 import { SalaryChart } from "../../../components/common/Dashboard/salarychart.jsx";
 import { Loading } from "../../../components/common/loading.jsx";
-import { AddEmployeesDialogBox } from "../../../components/common/Dashboard/dialogboxes.jsx";
+import { AddEmployeesDialogBox, CreateDepartmentDialogBox } from "../../../components/common/Dashboard/dialogboxes.jsx";
+import { CreateSalaryDialogBox } from "../../../components/common/Dashboard/salarydialogboxes.jsx"
+import { CreateNoticeDialogBox } from "../../../components/common/Dashboard/noticedialogboxes.jsx"
 import {
     Dialog,
     DialogTrigger
@@ -264,12 +266,13 @@ export const HRDashboardPage = ({formdata, handleformchange, }) => {
   </DialogTrigger>
 
   <AddEmpModal
-    formdata={formdata}
-    handleformchange={handleformchange}
+    formdata={formdata} 
+   handleformchange={handleformchange}
   />
 </Dialog>
-            <button
-              className="
+            <CreateDepartmentDialogBox>
+              <button
+                className="
               w-full
               flex
               items-center
@@ -280,20 +283,22 @@ export const HRDashboardPage = ({formdata, handleformchange, }) => {
               hover:bg-violet-100
               transition
             "
-            >
-              <div className="flex items-center gap-3">
-                <Building2
-                  size={20}
-                  className="text-violet-600"
-                />
-                <span>Create Department</span>
-              </div>
+              >
+                <div className="flex items-center gap-3">
+                  <Building2
+                    size={20}
+                    className="text-violet-600"
+                  />
+                  <span>Create Department</span>
+                </div>
 
-              <ArrowRight size={18} />
-            </button>
+                <ArrowRight size={18} />
+              </button>
+            </CreateDepartmentDialogBox>
 
-            <button
-              className="
+            <CreateNoticeDialogBox>
+              <button
+                className="
               w-full
               flex
               items-center
@@ -304,20 +309,22 @@ export const HRDashboardPage = ({formdata, handleformchange, }) => {
               hover:bg-amber-100
               transition
             "
-            >
-              <div className="flex items-center gap-3">
-                <Bell
-                  size={20}
-                  className="text-amber-600"
-                />
-                <span>Issue Notice</span>
-              </div>
+              >
+                <div className="flex items-center gap-3">
+                  <Bell
+                    size={20}
+                    className="text-amber-600"
+                  />
+                  <span>Issue Notice</span>
+                </div>
 
-              <ArrowRight size={18} />
-            </button>
+                <ArrowRight size={18} />
+              </button>
+            </CreateNoticeDialogBox>
 
-            <button
-              className="
+            <CreateSalaryDialogBox>
+              <button
+                className="
               w-full
               flex
               items-center
@@ -328,17 +335,18 @@ export const HRDashboardPage = ({formdata, handleformchange, }) => {
               hover:bg-emerald-100
               transition
             "
-            >
-              <div className="flex items-center gap-3">
-                <Wallet
-                  size={20}
-                  className="text-emerald-600"
-                />
-                <span>Manage Salaries</span>
-              </div>
+              >
+                <div className="flex items-center gap-3">
+                  <Wallet
+                    size={20}
+                    className="text-emerald-600"
+                  />
+                  <span>Manage Salaries</span>
+                </div>
 
-              <ArrowRight size={18} />
-            </button>
+                <ArrowRight size={18} />
+              </button>
+            </CreateSalaryDialogBox>
 
           </div>
         </div>

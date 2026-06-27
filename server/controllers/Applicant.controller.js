@@ -23,7 +23,7 @@ export const HandleCreateApplicant = async (req, res) => {
             organizationID: req.ORGID
         })
 
-        res.status(201).json({ success: true, message: "Applicant created successfully", data: newApplicant })
+        res.status(201).json({ success: true, message: "Applicant created successfully", data: newApplicant, type: "ApplicantCreate" })
     } catch (error) {
         res.status(500).json({ success: false, message: error.message })
     }
@@ -32,7 +32,7 @@ export const HandleCreateApplicant = async (req, res) => {
 export const HandleAllApplicants = async (req, res) => {
     try {
         const applicants = await Applicant.find({ organizationID: req.ORGID })
-        return res.status(200).json({ success: true, message: "All Applicants Found Successfully", data: applicants })
+        return res.status(200).json({ success: true, message: "All Applicants Found Successfully", data: applicants, type: "AllApplicants" })
     } catch (error) {
         return res.status(500).json({ success: false, message: "Internal Server Error", error: error })
     }
@@ -62,7 +62,7 @@ export const HandleUpdateApplicant = async (req, res) => {
             return res.status(404).json({ success: false, message: "Applicant not found" })
         }
 
-        return res.status(200).json({ success: true, message: "Applicant updated successfully", data: applicant })
+        return res.status(200).json({ success: true, message: "Applicant updated successfully", data: applicant, type: "ApplicantUpdate" })
     } catch (error) {
         return res.status(500).json({ success: false, message: "Internal Server Error", error: error })
     }
@@ -77,7 +77,7 @@ export const HandleDeleteApplicant = async (req, res) => {
             return res.status(404).json({ success: false, message: "Applicant not found" })
         }
 
-        return res.status(200).json({ success: true, message: "Applicant deleted successfully" })
+        return res.status(200).json({ success: true, message: "Applicant deleted successfully", type: "ApplicantDelete" })
     } catch (error) {
         return res.status(500).json({ success: false, message: "Internal Server Error", error: error })
     }

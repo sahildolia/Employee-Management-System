@@ -242,6 +242,126 @@ export const HRDepartmentPageAsyncReducer = (builder, thunk) => {
 }
 
 
+export const HRNoticePageAsyncReducer = (builder, thunk) => {
+    builder.addCase(thunk.pending, (state) => {
+        state.isLoading = true;
+        state.error.content = null;
+    })
+    builder.addCase(thunk.fulfilled, (state, action) => {
+        if (action.payload.type === "AllNotices") {
+            state.isLoading = false;
+            state.error.status = false;
+            state.error.message = null
+            state.error.content = null;
+            state.data = action.payload.data;
+            state.fetchData = false
+            state.success.status = false
+            state.success.message = null
+            state.success.content = null
+        }
+        else if (action.payload.type === "NoticeCreate" ||
+            action.payload.type === "NoticeUpdate" ||
+            action.payload.type === "NoticeDelete")
+        {
+            state.isLoading = false;
+            state.error.status = false;
+            state.error.message = null
+            state.error.content = null;
+            state.success.status = action.payload.success;
+            state.success.message = action.payload.message;
+            state.success.content = action.payload;
+            state.fetchData = true
+        }
+    })
+    builder.addCase(thunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error.status = true;
+        state.error.message = action.payload.message
+        state.success = action.payload.success;
+        state.error.content = action.payload;
+    })
+}
+
+export const HRLeavePageAsyncReducer = (builder, thunk) => {
+    builder.addCase(thunk.pending, (state) => {
+        state.isLoading = true;
+        state.error.content = null;
+    })
+    builder.addCase(thunk.fulfilled, (state, action) => {
+        if (action.payload.type === "AllLeaves") {
+            state.isLoading = false;
+            state.error.status = false;
+            state.error.message = null
+            state.error.content = null;
+            state.data = action.payload.data;
+            state.fetchData = false
+            state.success.status = false
+            state.success.message = null
+            state.success.content = null
+        }
+        else if (action.payload.type === "LeaveCreate" ||
+            action.payload.type === "LeaveDelete" ||
+            action.payload.type === "LeaveHRUpdate")
+        {
+            state.isLoading = false;
+            state.error.status = false;
+            state.error.message = null
+            state.error.content = null;
+            state.success.status = action.payload.success;
+            state.success.message = action.payload.message;
+            state.success.content = action.payload;
+            state.fetchData = true
+        }
+    })
+    builder.addCase(thunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error.status = true;
+        state.error.message = action.payload.message
+        state.success = action.payload.success;
+        state.error.content = action.payload;
+    })
+}
+
+export const HRSalaryPageAsyncReducer = (builder, thunk) => {
+    builder.addCase(thunk.pending, (state) => {
+        state.isLoading = true;
+        state.error.content = null;
+    })
+    builder.addCase(thunk.fulfilled, (state, action) => {
+        if (action.payload.type === "AllSalary") {
+            state.isLoading = false;
+            state.error.status = false;
+            state.error.message = null
+            state.error.content = null;
+            state.data = action.payload.data;
+            state.fetchData = false
+            state.success.status = false
+            state.success.message = null
+            state.success.content = null
+        }
+        else if (action.payload.type === "SalaryCreate" ||
+            action.payload.type === "SalaryUpdate" ||
+            action.payload.type === "SalaryDelete")
+        {
+            state.isLoading = false;
+            state.error.status = false;
+            state.error.message = null
+            state.error.content = null;
+            state.success.status = action.payload.success;
+            state.success.message = action.payload.message;
+            state.success.content = action.payload;
+            state.fetchData = true
+        }
+    })
+    builder.addCase(thunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error.status = true;
+        state.error.message = action.payload.message
+        state.success = action.payload.success;
+        state.error.content = action.payload;
+    })
+}
+
 export const EmployeesIDsAsyncReducer = (builder, thunk) => {
     builder.addCase(thunk.pending, (state) => {
         state.isLoading = true;
@@ -259,5 +379,243 @@ export const EmployeesIDsAsyncReducer = (builder, thunk) => {
         state.error.status = true;
         state.error.message = action.payload.message
         state.error.content = action.payload
+    })
+}
+
+export const HRAttendancePageAsyncReducer = (builder, thunk) => {
+    builder.addCase(thunk.pending, (state) => {
+        state.isLoading = true;
+        state.error.content = null;
+    })
+    builder.addCase(thunk.fulfilled, (state, action) => {
+        if (action.payload.type === "AllAttendance") {
+            state.isLoading = false;
+            state.error.status = false;
+            state.error.message = null
+            state.error.content = null;
+            state.data = action.payload.data;
+            state.fetchData = false
+            state.success.status = false
+            state.success.message = null
+            state.success.content = null
+        }
+        else if (action.payload.type === "AttendanceCreate" ||
+            action.payload.type === "AttendanceDelete")
+        {
+            state.isLoading = false;
+            state.error.status = false;
+            state.error.message = null
+            state.error.content = null;
+            state.success.status = action.payload.success;
+            state.success.message = action.payload.message;
+            state.success.content = action.payload;
+            state.fetchData = true
+        }
+    })
+    builder.addCase(thunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error.status = true;
+        state.error.message = action.payload.message
+        state.success = action.payload.success;
+        state.error.content = action.payload;
+    })
+}
+
+export const HRCalendarPageAsyncReducer = (builder, thunk) => {
+    builder.addCase(thunk.pending, (state) => {
+        state.isLoading = true;
+        state.error.content = null;
+    })
+    builder.addCase(thunk.fulfilled, (state, action) => {
+        if (action.payload.type === "AllEvents") {
+            state.isLoading = false;
+            state.error.status = false;
+            state.error.message = null
+            state.error.content = null;
+            state.data = action.payload.data;
+            state.fetchData = false
+            state.success.status = false
+            state.success.message = null
+            state.success.content = null
+        }
+        else if (action.payload.type === "EventCreate" ||
+            action.payload.type === "EventUpdate" ||
+            action.payload.type === "EventDelete")
+        {
+            state.isLoading = false;
+            state.error.status = false;
+            state.error.message = null
+            state.error.content = null;
+            state.success.status = action.payload.success;
+            state.success.message = action.payload.message;
+            state.success.content = action.payload;
+            state.fetchData = true
+        }
+    })
+    builder.addCase(thunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error.status = true;
+        state.error.message = action.payload.message
+        state.success = action.payload.success;
+        state.error.content = action.payload;
+    })
+}
+
+export const HRRecruitmentPageAsyncReducer = (builder, thunk) => {
+    builder.addCase(thunk.pending, (state) => {
+        state.isLoading = true;
+        state.error.content = null;
+    })
+    builder.addCase(thunk.fulfilled, (state, action) => {
+        if (action.payload.type === "AllRecruitment") {
+            state.isLoading = false;
+            state.error.status = false;
+            state.error.message = null
+            state.error.content = null;
+            state.data = action.payload.data;
+            state.fetchData = false
+            state.success.status = false
+            state.success.message = null
+            state.success.content = null
+        }
+        else if (action.payload.type === "RecruitmentCreate" ||
+            action.payload.type === "RecruitmentUpdate" ||
+            action.payload.type === "RecruitmentDelete")
+        {
+            state.isLoading = false;
+            state.error.status = false;
+            state.error.message = null
+            state.error.content = null;
+            state.success.status = action.payload.success;
+            state.success.message = action.payload.message;
+            state.success.content = action.payload;
+            state.fetchData = true
+        }
+    })
+    builder.addCase(thunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error.status = true;
+        state.error.message = action.payload.message
+        state.success = action.payload.success;
+        state.error.content = action.payload;
+    })
+}
+
+export const HRApplicantPageAsyncReducer = (builder, thunk) => {
+    builder.addCase(thunk.pending, (state) => {
+        state.isLoading = true;
+        state.error.content = null;
+    })
+    builder.addCase(thunk.fulfilled, (state, action) => {
+        if (action.payload.type === "AllApplicants") {
+            state.isLoading = false;
+            state.error.status = false;
+            state.error.message = null
+            state.error.content = null;
+            state.data = action.payload.data;
+            state.fetchData = false
+            state.success.status = false
+            state.success.message = null
+            state.success.content = null
+        }
+        else if (action.payload.type === "ApplicantCreate" ||
+            action.payload.type === "ApplicantUpdate" ||
+            action.payload.type === "ApplicantDelete")
+        {
+            state.isLoading = false;
+            state.error.status = false;
+            state.error.message = null
+            state.error.content = null;
+            state.success.status = action.payload.success;
+            state.success.message = action.payload.message;
+            state.success.content = action.payload;
+            state.fetchData = true
+        }
+    })
+    builder.addCase(thunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error.status = true;
+        state.error.message = action.payload.message
+        state.success = action.payload.success;
+        state.error.content = action.payload;
+    })
+}
+
+export const HRInterviewPageAsyncReducer = (builder, thunk) => {
+    builder.addCase(thunk.pending, (state) => {
+        state.isLoading = true;
+        state.error.content = null;
+    })
+    builder.addCase(thunk.fulfilled, (state, action) => {
+        if (action.payload.type === "AllInterviews") {
+            state.isLoading = false;
+            state.error.status = false;
+            state.error.message = null
+            state.error.content = null;
+            state.data = action.payload.data;
+            state.fetchData = false
+            state.success.status = false
+            state.success.message = null
+            state.success.content = null
+        }
+        else if (action.payload.type === "InterviewCreate" ||
+            action.payload.type === "InterviewUpdate" ||
+            action.payload.type === "InterviewDelete")
+        {
+            state.isLoading = false;
+            state.error.status = false;
+            state.error.message = null
+            state.error.content = null;
+            state.success.status = action.payload.success;
+            state.success.message = action.payload.message;
+            state.success.content = action.payload;
+            state.fetchData = true
+        }
+    })
+    builder.addCase(thunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error.status = true;
+        state.error.message = action.payload.message
+        state.success = action.payload.success;
+        state.error.content = action.payload;
+    })
+}
+
+export const EmployeeDashboardAsyncReducer = (builder, thunk) => {
+    builder.addCase(thunk.pending, (state) => {
+        state.isLoading = true;
+        state.error.content = null;
+    })
+    builder.addCase(thunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error.message = null;
+        state.error.content = null;
+        state.error.status = false;
+        if (action.payload.type === "MyAttendance") {
+            state.attendance = action.payload.data;
+        } else if (action.payload.type === "MyLeaves") {
+            state.leaves = action.payload.data;
+            state.fetchData = false;
+            state.success.status = false;
+        } else if (action.payload.type === "MySalary") {
+            state.salary = action.payload.data;
+        } else if (action.payload.type === "MyNotices") {
+            state.notices = action.payload.data;
+        } else if (action.payload.type === "MyRequests") {
+            state.requests = action.payload.data;
+        } else if (action.payload.type === "LeaveCreate" || action.payload.type === "LeaveUpdate" || action.payload.type === "LeaveDelete") {
+            state.success.status = action.payload.success;
+            state.success.message = action.payload.message;
+            state.success.content = action.payload;
+            state.fetchData = true;
+        } else {
+            state.profile = action.payload.data;
+        }
+    })
+    builder.addCase(thunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error.status = true;
+        state.error.message = action.payload?.message;
+        state.error.content = action.payload;
     })
 }

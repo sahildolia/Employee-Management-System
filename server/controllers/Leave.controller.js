@@ -3,6 +3,32 @@ import { HumanResources } from "../models/HR.model.js"
 import { Leave } from "../models/Leave.model.js"
 
 
+export const HandleEmployeeCreateLeave = async (req, res) => {
+    try {
+        const { startdate, enddate, title, reason } = req.body
+        if (!startdate || !enddate || !title || !reason) {
+            return res.status(400).json({ success: false, message: "All fields are required" })
+        }
+        const employee = await Employee.findOne({ _id: req.EMid, organizationID: req.ORGID })
+        if (!employee) {
+            return res.status(404).json({ success: false, message: "Employee not found" })
+        }
+        const leave = await Leave.create({
+            employee: req.EMid,
+            startdate: new Date(startdate),
+            enddate: new Date(enddate),
+            title,
+            reason,
+            organizationID: req.ORGID
+        })
+        employee.leaverequest.push(leave._id)
+        await employee.save()
+        return res.status(200).json({ success: true, message: "Leave request submitted successfully", data: leave, type: "LeaveCreate" })
+    } catch (error) {
+        return res.status(500).json({ success: false, message: error.message })
+    }
+}
+
 export const HandleCreateLeave = async (req, res) => {
     try {
         const { employeeID, startdate, enddate, title, reason } = req.body
@@ -40,7 +66,7 @@ export const HandleCreateLeave = async (req, res) => {
         employee.leaverequest.push(leave._id)
         await employee.save()
 
-        return res.status(200).json({ success: true, message: "Leave request created successfully", data: leave })
+        return res.status(200).json({ success: true, message: "Leave request created successfully", data: leave, type: "LeaveCreate" })
 
     } catch (error) {
         return res.status(500).json({ success: false, message: error.message })
@@ -50,7 +76,7 @@ export const HandleCreateLeave = async (req, res) => {
 export const HandleAllLeaves = async (req, res) => {
     try {
         const leaves = await Leave.find({ organizationID: req.ORGID }).populate("employee approvedby", "firstname lastname department")
-        return res.status(200).json({ success: true, message: "All leave records retrieved successfully", data: leaves })
+        return res.status(200).json({ success: true, message: "All leave records retrieved successfully", data: leaves, type: "AllLeaves" })
     } catch (error) {
         return res.status(500).json({ success: false, message: "Internal server error" })
     }
@@ -92,7 +118,7 @@ export const HandleUpdateLeaveByEmployee = async (req, res) => {
 
         await leave.save()
 
-        return res.status(200).json({ success: true, message: "Leave record updated successfully", data: leave })
+        return res.status(200).json({ success: true, message: "Leave record updated successfully", data: leave, type: "LeaveUpdate" })
     } catch (error) {
         return res.status(500).json({ success: false, message: "Internal server error" })
     }
@@ -100,7 +126,8 @@ export const HandleUpdateLeaveByEmployee = async (req, res) => {
 
 export const HandleUpdateLeavebyHR = async (req, res) => {
     try {
-        const { leaveID, status, HRID } = req.body
+        const { leaveID, status } = req.body
+        const HRID = req.HRid
 
         if (!leaveID || !status || !HRID) {
             return res.status(400).json({ success: false, message: "All fields are required" })
@@ -121,7 +148,16 @@ export const HandleUpdateLeavebyHR = async (req, res) => {
         leave.approvedby = HRID
 
         await leave.save()
-        return res.status(200).json({ success: true, message: "Leave record updated successfully", data: leave })
+        return res.status(200).json({ success: true, message: "Leave record updated successfully", data: leave, type: "LeaveHRUpdate" })
+    } catch (error) {
+        return res.status(500).json({ success: false, message: "Internal server error" })
+    }
+}
+
+export const HandleMyLeaves = async (req, res) => {
+    try {
+        const leaves = await Leave.find({ employee: req.EMid, organizationID: req.ORGID }).populate("employee approvedby", "firstname lastname")
+        return res.status(200).json({ success: true, message: "My leave records retrieved successfully", data: leaves, type: "MyLeaves" })
     } catch (error) {
         return res.status(500).json({ success: false, message: "Internal server error" })
     }
@@ -143,7 +179,7 @@ export const HandleDeleteLeave = async (req, res) => {
         await employee.save()
         await leave.deleteOne()
 
-        return res.status(200).json({ success: true, message: "Leave record deleted successfully" })
+        return res.status(200).json({ success: true, message: "Leave record deleted successfully", type: "LeaveDelete" })
     } catch (error) {
         return res.status(500).json({ success: false, message: "Internal server error" })
     }

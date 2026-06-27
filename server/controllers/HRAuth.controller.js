@@ -125,7 +125,9 @@ export const HandleHRLogin = async (req, res) => {
         GenerateJwtTokenAndSetCookiesHR(res, HR._id, HR.role, HR.organizationID)
         HR.lastlogin = new Date()
         await HR.save()
-        return res.status(200).json({ success: true, message: "HR Login Successfull", type: "HRLogin" })
+        const HRData = HR.toObject()
+        delete HRData.password
+        return res.status(200).json({ success: true, message: "HR Login Successfull", HR: HRData, type: "HRLogin" })
     }
     catch (error) {
         return res.status(500).json({ success: false, message: "Internal Server Error", error: error, type: "HRLogin" })
@@ -147,7 +149,9 @@ export const HandleHRCheck = async (req, res) => {
         if (!HR) {
             return res.status(404).json({ success: false, message: "HR not found", type: "checkHR" })
         }
-        return res.status(200).json({ success: true, message: "HR Already Logged In", type: "checkHR" })
+        const HRData = HR.toObject()
+        delete HRData.password
+        return res.status(200).json({ success: true, message: "HR Already Logged In", HR: HRData, type: "checkHR" })
     } catch (error) {
         return res.status(500).json({ success: false, error: error, message: "internal error", type: "checkHR" })
     }

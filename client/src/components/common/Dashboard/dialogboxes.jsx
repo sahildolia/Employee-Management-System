@@ -60,7 +60,7 @@ export const AddEmployeesDialogBox = () => {
               transition
             ">Add Employees</DialogTrigger>
              <AddEmpModal formdata={formdata} handleformchange={handleformchange}/>
-                {/* <DialogContent className="max-w-[315px] sm:max-w-[50vw] 2xl:max-w-[45vw]">
+                {/* <DialogContent className="max-w-[95vw] sm:max-w-[50vw] 2xl:max-w-[45vw]">
                     <div className="add-employees-container flex flex-col gap-5">
                         <div className="heading">
                             <h1 className="font-bold text-2xl">Add Employee Info</h1>
@@ -145,7 +145,7 @@ export const EmployeeDetailsDialogBox = ({ EmployeeID }) => {
                 <div>
                     <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">View</DialogTrigger>
                 </div>
-                <DialogContent className="max-w-[315px] lg:max-w-[55vw] 2xl:max-w-[45vw]">
+                <DialogContent className="max-w-[95vw] lg:max-w-[55vw] 2xl:max-w-[45vw]">
                     <div className="employee-data-container flex flex-col gap-4">
                         <div className="employee-profile-logo flex items-center gap-3">
                             <div className="logo border-2 border-blue-800 rounded-[50%] flex justify-center items-center">
@@ -218,7 +218,7 @@ export const DeleteEmployeeDialogBox = ({ EmployeeID }) => {
         <div className="delete-employee-dialog-container">
             <Dialog>
                 <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">Delete</DialogTrigger>
-                <DialogContent className="max-w-[315px] lg:max-w-[35vw] 2xl:max-w-[30vw]">
+                <DialogContent className="max-w-[95vw] lg:max-w-[35vw] 2xl:max-w-[30vw]">
                     <div className="flex flex-col justify-center items-center gap-4">
                         <p className="text-lg font-bold min-[250px]:text-center">Are you sure you want to delete this employee?</p>
                         <div className="delete-employee-button-group flex gap-2">
@@ -238,7 +238,7 @@ export const DeleteEmployeeDialogBox = ({ EmployeeID }) => {
 
 
 
-export const CreateDepartmentDialogBox = () => {
+export const CreateDepartmentDialogBox = ({ children }) => {
     const { toast } = useToast()
     const dispatch = useDispatch()
     const [formdata, setformdata] = useState({
@@ -268,8 +268,12 @@ export const CreateDepartmentDialogBox = () => {
 
     return (
         <Dialog>
-            <DialogTrigger className="min-[250px]:text-sm sm:text-lg min-[250px]:px-2 min-[250px]:py-1 sm:px-4 sm:py-2 bg-blue-700 font-bold text-white rounded-lg border-2 primary1 hover:bg-white hover:text-blue-700">Create Department</DialogTrigger>
-            <DialogContent className="max-w-[315px] lg:max-w-[35vw] 2xl:max-w-[30vw]">
+            {children ? (
+                <DialogTrigger asChild>{children}</DialogTrigger>
+            ) : (
+                <DialogTrigger className="min-[250px]:text-sm sm:text-lg min-[250px]:px-2 min-[250px]:py-1 sm:px-4 sm:py-2 bg-blue-700 font-bold text-white rounded-lg border-2 primary1 hover:bg-white hover:text-blue-700">Create Department</DialogTrigger>
+            )}
+            <DialogContent className="max-w-[95vw] lg:max-w-[35vw] 2xl:max-w-[30vw]">
                 <div className="create-department-container flex flex-col gap-4">
                     <div className="create-department-heading">
                         <h1 className="font-bold text-2xl">Create Department</h1>
@@ -359,7 +363,7 @@ export const EmployeesIDSDialogBox = ({ DepartmentID }) => {
         <div className="employeeIDs-box-container">
             <Dialog>
                 <DialogTrigger className="px-4 py-2 font-bold m-2 bg-blue-600 text-white border-2 border-blue-600 rounded-lg hover:bg-white hover:text-blue-700 min-[250px]:text-xs md:text-sm lg:text-lg" onClick={() => dispatch(fetchEmployeesIDs({ apiroute: "GETALL" }))}>Add Employees</DialogTrigger>
-                <DialogContent className="max-w-[315px] lg:max-w-[35vw] 2xl:max-w-[30vw]">
+                <DialogContent className="max-w-[95vw] lg:max-w-[35vw] 2xl:max-w-[30vw]">
                     {EmployeesIDState.isLoading ? <Loading height={"h-auto"} /> : <div className="employeeID-checkbox-container flex flex-col gap-4">
                         <div>
                             <h1 className="font-bold text-2xl">Select Employees</h1>
@@ -405,7 +409,7 @@ export const RemoveEmployeeFromDepartmentDialogBox = ({ DepartmentName, Departme
         <div className="remove-employee">
             <Dialog>
                 <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">Remove</DialogTrigger>
-                <DialogContent className="max-w-[315px] lg:max-w-[35vw] 2xl:max-w-[30vw]">
+                <DialogContent className="max-w-[95vw] lg:max-w-[35vw] 2xl:max-w-[30vw]">
                     <div className="flex flex-col justify-center items-center gap-4">
                         <p className="text-lg font-bold min-[250px]:text-center">{`Are you sure you want to remove this employee from ${DepartmentName} department ?`}</p>
                         <div className="delete-employee-button-group flex gap-2">

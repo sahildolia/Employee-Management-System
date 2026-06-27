@@ -5,12 +5,13 @@ import { Notice } from "../models/Notice.model.js"
 
 export const HandleCreateNotice = async (req, res) => {
     try {
-        const { title, content, audience, departmentID, employeeID, HRID } = req.body
+        const { title, content, audience, departmentID, employeeID } = req.body
+        const HRID = req.HRid
 
         if (audience === "Department-Specific") {
 
-            if (!title || !content || !audience || !departmentID || !HRID) {
-                return res.status(404).json({ success: false, message: "All fields must be provided" })
+            if (!title || !content || !audience || !departmentID) {
+                return res.status(400).json({ success: false, message: "All fields must be provided" })
             }
 
             const department = await Department.findById(departmentID)
@@ -43,12 +44,12 @@ export const HandleCreateNotice = async (req, res) => {
             department.notice.push(notice._id)
             await department.save()
 
-            return res.status(200).json({ success: true, message: "Specific Notice Created Successfully", data: notice })
+            return res.status(200).json({ success: true, message: "Specific Notice Created Successfully", data: notice, type: "NoticeCreate" })
         }
 
         if (audience === "Employee-Specific") {
-            if (!title || !content || !audience || !employeeID || !HRID) {
-                return res.status(404).json({ success: false, message: "All fields must be provided" })
+            if (!title || !content || !audience || !employeeID) {
+                return res.status(400).json({ success: false, message: "All fields must be provided" })
             }
 
             const employee = await Employee.findById(employeeID)
@@ -81,7 +82,7 @@ export const HandleCreateNotice = async (req, res) => {
             employee.notice.push(notice._id)
             await employee.save()
 
-            return res.status(200).json({ success: true, message: "Specific Notice Created Successfully", data: notice })
+            return res.status(200).json({ success: true, message: "Specific Notice Created Successfully", data: notice, type: "NoticeCreate" })
         }
 
     }
@@ -107,7 +108,7 @@ export const HandleAllNotice = async (req, res) => {
             }
         }
 
-        return res.status(200).json({ success: true, message: "All notice records retrieved successfully", data: data })
+        return res.status(200).json({ success: true, message: "All notice records retrieved successfully", data: data, type: "AllNotices" })
 
     } catch (error) {
         return res.status(500).json({ success: false, message: "Internal Server Error", error: error })
@@ -142,8 +143,29 @@ export const HandleUpdateNotice = async (req, res) => {
             return res.status(404).json({ success: false, message: "Notice not found" })
         }
 
-        return res.status(200).json({ success: true, message: "Salary record updated successfully", data: notice })
+        return res.status(200).json({ success: true, message: "Notice updated successfully", data: notice, type: "NoticeUpdate" })
 
+    } catch (error) {
+        return res.status(500).json({ success: false, message: "Internal Server Error", error: error })
+    }
+}
+
+export const HandleMyNotices = async (req, res) => {
+    try {
+        const employee = await Employee.findOne({ _id: req.EMid, organizationID: req.ORGID }).populate("department")
+        if (!employee) {
+            return res.status(404).json({ success: false, message: "Employee not found", type: "MyNotices" })
+        }
+        const empId = req.EMid
+        const deptId = employee.department ? employee.department._id : null
+        const notices = await Notice.find({
+            organizationID: req.ORGID,
+            $or: [
+                { employee: empId },
+                ...(deptId ? [{ department: deptId }] : [])
+            ]
+        }).populate("createdby", "firstname lastname").sort({ _id: -1 })
+        return res.status(200).json({ success: true, message: "My notices retrieved successfully", data: notices, type: "MyNotices" })
     } catch (error) {
         return res.status(500).json({ success: false, message: "Internal Server Error", error: error })
     }
@@ -176,7 +198,7 @@ export const HandleDeleteNotice = async (req, res) => {
             await department.save()
             await notice.deleteOne()
 
-            return res.status(200).json({ success: true, message: "Notice deleted successfully" })
+            return res.status(200).json({ success: true, message: "Notice deleted successfully", type: "NoticeDelete" })
         }
     } catch (error) {
         return res.status(500).json({ success: false, message: "internal server error", error: error })

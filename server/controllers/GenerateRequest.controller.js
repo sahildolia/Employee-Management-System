@@ -105,6 +105,15 @@ export const HandleUpdateRequestByHR = async (req, res) => {
 }
 
 
+export const HandleMyRequests = async (req, res) => {
+    try {
+        const requests = await GenerateRequest.find({ employee: req.EMid, organizationID: req.ORGID }).populate("employee department", "firstname lastname name")
+        return res.status(200).json({ success: true, message: "My requests retrieved successfully", data: requests, type: "MyRequests" })
+    } catch (error) {
+        return res.status(500).json({ success: false, message: "Internal Server Error", error: error })
+    }
+}
+
 export const HandleDeleteRequest = async (req, res) => {
     try {
         const { requestID } = req.params
