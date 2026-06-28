@@ -7,6 +7,8 @@ const router = express.Router()
 
 router.post("/initialize", VerifyEmployeeToken, HandleInitializeAttendance)
 
+router.post("/initialize-hr", VerifyhHRToken, RoleAuthorization("HR-Admin"), HandleInitializeAttendance)
+
 router.get("/all", VerifyhHRToken, RoleAuthorization("HR-Admin"), HandleAllAttendance)
 
 router.get("/my-attendance", VerifyEmployeeToken, HandleMyAttendance)

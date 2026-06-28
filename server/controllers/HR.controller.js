@@ -2,6 +2,20 @@ import { Department } from "../models/Department.model.js"
 import { HumanResources } from "../models/HR.model.js"
 import { Organization } from "../models/Organization.model.js"
 
+export const HandleHRBySelf = async (req, res) => {
+    try {
+        const HR = await HumanResources.findOne({ _id: req.HRid, organizationID: req.ORGID }).populate("department", "name")
+
+        if (!HR) {
+            return res.status(404).json({ success: false, message: "HR Record Not Found" })
+        }
+
+        return res.status(200).json({ success: true, message: "HR Profile Fetched Successfully", data: HR })
+    } catch (error) {
+        return res.status(500).json({ success: false, message: "Internal Server Error", error: error })
+    }
+}
+
 export const HandleAllHR = async (req, res) => {
     try {
         const HR = await HumanResources.find({ organizationID: req.ORGID }).populate("department")

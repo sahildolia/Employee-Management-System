@@ -1,10 +1,11 @@
 import express from 'express'
-import { HandleAllHR, HandleDeleteHR, HandleHR, HandleUpdateHR } from '../controllers/HR.controller.js'
+import { HandleAllHR, HandleDeleteHR, HandleHR, HandleHRBySelf, HandleUpdateHR } from '../controllers/HR.controller.js'
 import { VerifyhHRToken } from '../middlewares/Auth.middleware.js'
 import { RoleAuthorization } from '../middlewares/RoleAuth.middleware.js'
 
 const router = express.Router()
 
+router.get("/by-hr", VerifyhHRToken, RoleAuthorization("HR-Admin"), HandleHRBySelf)
 
 router.get("/all", VerifyhHRToken, RoleAuthorization("HR-Admin"), HandleAllHR)
 

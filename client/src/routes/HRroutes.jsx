@@ -20,6 +20,7 @@ import { HRCalendarPage } from "../pages/HumanResources/Dashboard Childs/calenda
 import { HRRecruitmentPage } from "../pages/HumanResources/Dashboard Childs/recruitmentpage.jsx"
 import { HRApplicantPage } from "../pages/HumanResources/Dashboard Childs/applicantpage.jsx"
 import { HRInterviewPage } from "../pages/HumanResources/Dashboard Childs/interviewpage.jsx"
+import { HRProfilePage } from "../pages/HumanResources/Dashboard Childs/hrprofilepage.jsx"
 export const HRRoutes = [
     {
         path: "/auth/HR/signup",
@@ -76,6 +77,10 @@ export const HRRoutes = [
             {
                 path: "/HR/dashboard/interviews",
                 element: <HRInterviewPage />
+            },
+            {
+                path: "/HR/dashboard/profile",
+                element: <HRProfilePage />
             }
         ]
     },

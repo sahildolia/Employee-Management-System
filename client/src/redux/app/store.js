@@ -14,6 +14,7 @@ import HRCalendarPageReducer from '../Slices/HRCalendarPageSlice.js'
 import HRRecruitmentPageReducer from '../Slices/HRRecruitmentPageSlice.js'
 import HRApplicantPageReducer from '../Slices/HRApplicantPageSlice.js'
 import HRInterviewPageReducer from '../Slices/HRInterviewPageSlice.js'
+import HRProfileReducer from '../Slices/HRProfileSlice.js'
 
 export const store = configureStore({
     reducer: {
@@ -31,6 +32,7 @@ export const store = configureStore({
         HRCalendarPageReducer : HRCalendarPageReducer,
         HRRecruitmentPageReducer : HRRecruitmentPageReducer,
         HRApplicantPageReducer : HRApplicantPageReducer,
-        HRInterviewPageReducer : HRInterviewPageReducer
+        HRInterviewPageReducer : HRInterviewPageReducer,
+        HRProfileReducer: HRProfileReducer
     }
 })

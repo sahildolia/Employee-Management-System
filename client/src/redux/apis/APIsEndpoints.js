@@ -78,7 +78,7 @@ export const EmployeeDashboardEndPoints = {
 
 export const HRAttendancePageEndPoints = {
     all: "/api/v1/attendance/all",
-    create: "/api/v1/attendance/initialize",
+    create: "/api/v1/attendance/initialize-hr",
     delete: (AID) => `/api/v1/attendance/delete-attendance/${AID}`,
 }
 
@@ -108,4 +108,9 @@ export const HRInterviewPageEndPoints = {
     CREATE: "/api/v1/interview-insights/create-interview",
     UPDATE: "/api/v1/interview-insights/update-interview",
     DELETE: (IID) => `/api/v1/interview-insights/delete-interview/${IID}`,
+}
+
+export const HRProfileEndPoints = {
+    MY_HR_PROFILE: "/api/v1/HR/by-hr",
+    UPDATE_HR_PROFILE: "/api/v1/HR/update-HR",
 } 
