@@ -1,326 +1,112 @@
-import { ErrorPopup } from "./error-popup"
-import { useSelector } from "react-redux"
-import { Button } from "@/components/ui/button"
-import { Link } from "react-router-dom"
 
+import { ErrorPopup } from "./error-popup";
+import { useSelector } from "react-redux";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { Building2, User, ShieldCheck } from "lucide-react";
 
 export const SignUP = ({ handlesignupform, handlesubmitform, stateformdata, errorpopup }) => {
-    const employeestate = useSelector((state) => state.HRReducer)
-    return (
-        <>
-            {employeestate.error.status ? <ErrorPopup error={employeestate.error.message} /> : null}
-            {errorpopup ? <ErrorPopup error={"Password does not match, Please try again"} /> : null}
-            <div className="HR-form-content justify-center items-center min-[250px]:w-[90%] 2xl:w-[80%] grid grid-cols-1 min-[900px]:grid-cols-2 mx-auto">
+  const employeestate = useSelector((state) => state.HRReducer);
 
-                <div className="form-img mx-auto">
-                    <img src="../../src/assets/Employee-Welcome.jpg" alt="Your Company" className=" min-[250px]:max-w-[15rem] min-[600px]:max-w-sm min-[900px]:max-w-sm 2xl:max-w-md" />
-                </div>
+  const inputClass =
+    "w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition-all focus:border-blue-600 focus:ring-2 focus:ring-blue-200";
 
-                {/* <div className="form-content flex flex-col gap-6 sm:justify-center min-[250px]:items-center sm:items-center md:items-start md:justify-normal">
+  return (
+    <>
+      {employeestate.error.status && <ErrorPopup error={employeestate.error.message} />}
+      {errorpopup && <ErrorPopup error="Password does not match, Please try again" />}
 
-                        <div className="form-heading my-3">
-                            <h1 className="text-4xl text-purple-700 font-bold">Sign UP HR</h1>
-                        </div>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50 flex items-center justify-center p-2 sm:p-4">
+        <div className="w-full max-w-6xl bg-white rounded-[24px] shadow-2xl overflow-auto grid lg:grid-cols-2 max-h-[98vh]">
 
-                        <div className="form-content flex gap-8 min-[250px]:flex-col sm:flex-row">
+          <div className="bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-500 text-white p-6 lg:p-8 flex flex-col justify-center">
+            <img
+              src="../../src/assets/Employee-Welcome.jpg"
+              alt="Welcome"
+              className="w-full max-w-xs mx-auto rounded-2xl shadow-xl max-h-fit object-cover"
+            />
 
-                            <div className="form-section-first min-[250px]:w-[80vw] sm:w-[30vw] md:w-[20vw] flex flex-col gap-5 sm:text-sm lg:text-md xl:text-lg">
+            <h1 className="text-2xl lg:text-3xl font-bold mt-4">HR Management Portal</h1>
+            <p className="mt-2 text-blue-100 leading-6 text-sm">
+              Create your organization and start managing employees,
+              departments, payroll, recruitment and attendance from one place.
+            </p>
 
-                                <div className="form-field">
-                                    <label htmlFor="firstname" className="block font-medium text-gray-900">
-                                        First Name
-                                    </label>
-                                    <div className="mt-2">
-                                        <input
-                                            id="firstname"
-                                            name="firstname"
-                                            type="text"
-                                            required
-                                            autoComplete="text"
-                                            value={stateformdata.firstname}
-                                            onChange={handlesignupform}
-                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 p-2"
-                                        />
-                                    </div>
-                                </div>
+            <div className="mt-4 space-y-2 text-sm">
+              <div className="flex items-center gap-2"><ShieldCheck size={18} /> Secure Authentication</div>
+              <div className="flex items-center gap-2"><User size={18} /> Employee Management</div>
+              <div className="flex items-center gap-2"><Building2 size={18} /> Organization Dashboard</div>
+            </div>
+          </div>
 
-                                <div className="form-field">
-                                    <label htmlFor="lastname" className="block font-medium text-gray-900">
-                                        Last Name
-                                    </label>
-                                    <div className="mt-2">
-                                        <input
-                                            id="lastname"
-                                            name="lastname"
-                                            type="text"
-                                            required
-                                            autoComplete="text"
-                                            value={stateformdata.lastname}
-                                            onChange={handlesignupform}
-                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 p-2"
-                                        />
-                                    </div>
-                                </div>
+          <div className="p-5 lg:p-6 overflow-y-auto">
+            <h2 className="text-2xl font-bold text-slate-800">Create HR Account</h2>
+            <p className="text-slate-500 mt-1 mb-4 text-sm">Fill in the details below to register your organization.</p>
 
-                                <div className="form-field">
-                                    <label htmlFor="contactnumber" className="block font-medium text-gray-900">
-                                        Contact Number
-                                    </label>
-                                    <div className="mt-2">
-                                        <input
-                                            id="contactnumber"
-                                            name="contactnumber"
-                                            type="number"
-                                            required
-                                            autoComplete="number"
-                                            onChange={handlesignupform}
-                                            value={stateformdata.contactnumber}
-                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 p-2"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
+            <div className="grid md:grid-cols-2 gap-4">
 
-                            <div className="form-section-second sm:w-[30vw] md:w-[20vw] flex flex-col gap-5 sm:text-sm lg:text-md xl:text-lg">
+              <div className="space-y-2">
+                <h3 className="font-semibold text-blue-600 text-sm">Personal Information</h3>
 
-                                <div className="form-field">
-                                    <label htmlFor="email" className="block font-medium text-gray-900">
-                                        Email
-                                    </label>
-                                    <div className="mt-2">
-                                        <input
-                                            id="email"
-                                            name="email"
-                                            type="email"
-                                            required
-                                            autoComplete="email"
-                                            value={stateformdata.email}
-                                            onChange={handlesignupform}
-                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 p-2"
-                                        />
-                                    </div>
-                                </div>
+                <label className="text-xs font-medium text-slate-600">First Name</label>
+                <input id="firstname" name="firstname" value={stateformdata.firstname} onChange={handlesignupform} className={inputClass} />
 
-                                <div className="form-field">
-                                    <label htmlFor="textpassword" className="block font-medium text-gray-900">
-                                        Password
-                                    </label>
-                                    <div className="mt-2">
-                                        <input
-                                            id="textpassword"
-                                            name="textpassword"
-                                            type="text"
-                                            required
-                                            autoComplete="text"
-                                            value={stateformdata.textpassword}
-                                            onChange={handlesignupform}
-                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 p-2"
-                                        />
-                                    </div>
-                                </div>
+                <label className="text-xs font-medium text-slate-600">Last Name</label>
+                <input id="lastname" name="lastname" value={stateformdata.lastname} onChange={handlesignupform} className={inputClass} />
 
-                                <div className="form-field">
-                                    <label htmlFor="password" className="block font-medium text-gray-900">
-                                        Confirm Password
-                                    </label>
-                                    <div className="mt-2">
-                                        <input
-                                            id="password"
-                                            name="password"
-                                            type="password"
-                                            required
-                                            autoComplete="password"
-                                            value={stateformdata.password}
-                                            onChange={handlesignupform}
-                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 p-2"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
+                <label className="text-xs font-medium text-slate-600">Email</label>
+                <input id="email" name="email" type="email" value={stateformdata.email} onChange={handlesignupform} className={inputClass} />
 
-                        </div>
+                <label className="text-xs font-medium text-slate-600">Contact Number</label>
+                <input id="contactnumber" name="contactnumber" value={stateformdata.contactnumber} onChange={handlesignupform} className={inputClass} />
 
-                        <div className="sign-up-button flex justify-between items-end min-[250px]:w-[80vw] sm:w-[65vw] md:w-[42vw] 3xl:w-[41.5vw]">
-                            <Button className="min-[250px]:text-xs min-[250px]:px-2 min-[250px]:py-1 sm:px-4 sm:py-2 sm:text-sm md:text-md  px-4 py-2 bg-purple-700 border-2 border-purple-700 text-white font-bold rounded-lg hover:bg-white hover:text-purple-700 hover:cursor-pointer" onClick={handlesubmitform}>Sign Up</Button>
+                <label className="text-xs font-medium text-slate-600">Password</label>
+                <input id="textpassword" name="textpassword" value={stateformdata.textpassword} onChange={handlesignupform} className={inputClass} />
 
-                            <div className="sign-in-button flex justify-center items-center gap-2">
-                                <h1 className="text-blue-600 font-bold min-[250px]:text-right min-[250px]:text-xs sm:text-sm md:text-md">
-                                    Already Have An Account?
-                                </h1>
-                                <Link to={"/auth/HR/login"}>
-                                    <Button className="min-[250px]:text-xs min-[250px]:px-2 min-[250px]:py-1 sm:px-4 sm:py-2 sm:text-sm md:text-md px-4 py-2 bg-purple-700 border-2 border-purple-700 text-white font-bold rounded-lg hover:bg-white hover:text-purple-700 hover:cursor-pointer">Sign In</Button>
-                                </Link>
-                            </div>
-                        </div>
-                    </div> */}
+                <label className="text-xs font-medium text-slate-600">Confirm Password</label>
+                <input id="password" name="password" type="password" value={stateformdata.password} onChange={handlesignupform} className={inputClass} />
+              </div>
 
-                
-                
-                <div className="form-button-group w-full grid grid-cols-1 gap-5">
+              <div className="space-y-2">
+                <h3 className="font-semibold text-blue-600 text-sm">Organization Information</h3>
 
-                    <div className="form-container grid min-[250px]:grid-cols-1 sm:grid-cols-2 w-full min-[250px]:gap-3 sm:gap-10 justify-center items-center">
+                <label className="text-xs font-medium text-slate-600">Organization Name</label>
+                <input id="name" name="name" value={stateformdata.name} onChange={handlesignupform} className={inputClass} />
 
-                        <div className="form-group-1 w-full flex flex-col gap-3">
-                            <div className="label-field-pair flex flex-col ">
-                                <label htmlFor="firstname">
-                                    First Name
-                                </label>
-                                <input
-                                    id="firstname"
-                                    name="firstname"
-                                    type="text"
-                                    required
-                                    autoComplete="text"
-                                    value={stateformdata.firstname}
-                                    onChange={handlesignupform}
-                                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 p-2" />
-                            </div>
-                            <div className="label-field-pair flex flex-col">
-                                <label htmlFor="lastname">
-                                    last Name
-                                </label>
-                                <input
-                                    id="lastname"
-                                    name="lastname"
-                                    type="text"
-                                    required
-                                    autoComplete="lastname"
-                                    value={stateformdata.lastname}
-                                    onChange={handlesignupform}
-                                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 p-2" />
-                            </div>
-                            <div className="label-field-pair flex flex-col">
-                                <label htmlFor="email">
-                                    Email
-                                </label>
-                                <input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    required
-                                    autoComplete="email"
-                                    value={stateformdata.email}
-                                    onChange={handlesignupform}
-                                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 p-2" />
-                            </div>
-                            <div className="label-field-pair flex flex-col">
-                                <label htmlFor="textpassword">
-                                    Password
-                                </label>
-                                <input
-                                    id="textpassword"
-                                    name="textpassword"
-                                    type="text"
-                                    required
-                                    autoComplete="textpassword"
-                                    value={stateformdata.textpassword}
-                                    onChange={handlesignupform}
-                                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 p-2" />
-                            </div>
-                            <div className="label-field-pair flex flex-col">
-                                <label htmlFor="password">
-                                    Confirm Password
-                                </label>
-                                <input
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    required
-                                    autoComplete="password"
-                                    value={stateformdata.password}
-                                    onChange={handlesignupform}
-                                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 p-2" />
-                            </div>
-                        </div>
+                <label className="text-xs font-medium text-slate-600">Description</label>
+                <input id="description" name="description" value={stateformdata.description} onChange={handlesignupform} className={inputClass} />
 
-                        <div className="form-group-2 w-full flex flex-col gap-3">
-                            <div className="label-field-pair flex flex-col">
-                                <label htmlFor="contactnumber">
-                                    Contact Number
-                                </label>
-                                <input
-                                    id="contactnumber"
-                                    name="contactnumber"
-                                    type="number"
-                                    required
-                                    autoComplete="text"
-                                    value={stateformdata.contactnumber}
-                                    onChange={handlesignupform}
-                                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 p-2" />
-                            </div>
-                            <div className="label-field-pair flex flex-col">
-                                <label htmlFor="name">
-                                    Organization Name
-                                </label>
-                                <input
-                                    id="name"
-                                    name="name"
-                                    type="text"
-                                    required
-                                    autoComplete="text"
-                                    value={stateformdata.name}
-                                    onChange={handlesignupform}
-                                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 p-2" />
-                            </div>
-                            <div className="label-field-pair flex flex-col">
-                                <label htmlFor="description">
-                                    Organization Description
-                                </label>
-                                <input
-                                    id="description"
-                                    name="description"
-                                    type="text"
-                                    required
-                                    autoComplete="text"
-                                    value={stateformdata.description}
-                                    onChange={handlesignupform}
-                                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 p-2" />
-                            </div>
-                            <div className="label-field-pair flex flex-col">
-                                <label htmlFor="OrganizationURL">
-                                    Organization URL
-                                </label>
-                                <input
-                                    id="OrganizationURL"
-                                    name="OrganizationURL"
-                                    type="text"
-                                    required
-                                    autoComplete="text"
-                                    value={stateformdata.OrganizationURL}
-                                    onChange={handlesignupform}
-                                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 p-2" />
-                            </div>
-                            <div className="label-field-pair flex flex-col">
-                                <label htmlFor="OrganizationMail">
-                                    Organization Mail
-                                </label>
-                                <input
-                                    id="OrganizationMail"
-                                    name="OrganizationMail"
-                                    type="text"
-                                    required
-                                    autoComplete="text"
-                                    value={stateformdata.OrganizationMail}
-                                    onChange={handlesignupform}
-                                    className="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 p-2" />
-                            </div>
+                <label className="text-xs font-medium text-slate-600">Organization URL</label>
+                <input id="OrganizationURL" name="OrganizationURL" value={stateformdata.OrganizationURL} onChange={handlesignupform} className={inputClass} />
 
-                        </div>
-                    </div>
+                <label className="text-xs font-medium text-slate-600">Organization Mail</label>
+                <input id="OrganizationMail" name="OrganizationMail" value={stateformdata.OrganizationMail} onChange={handlesignupform} className={inputClass} />
+              </div>
 
-                    <div className="buttons w-full flex justify-between">
-                        <Button className="min-[250px]:text-xs min-[250px]:px-2 min-[250px]:py-1 sm:px-4 sm:py-2 sm:text-sm md:text-md  px-4 py-2 bg-purple-700 border-2 border-purple-700 text-white font-bold rounded-lg hover:bg-white hover:text-purple-700 hover:cursor-pointer" onClick={handlesubmitform}>Sign Up</Button>
-                        <div className="sing-in flex justify-center items-center gap-2">
-                            <p className="min-[250px]:text-xs sm:text-sm">Already Have an Account?</p>
-                            <Link to={"/auth/HR/login"}>
-                                <Button className="min-[250px]:text-xs min-[250px]:px-2 min-[250px]:py-1 sm:px-4 sm:py-2 sm:text-sm md:text-md px-4 py-2 bg-purple-700 border-2 border-purple-700 text-white font-bold rounded-lg hover:bg-white hover:text-purple-700 hover:cursor-pointer">Sign In</Button>
-                            </Link>
-                        </div>
-                    </div>
-
-                </div>
             </div>
 
-        </>
-    )
-}
+            <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <Button
+                onClick={handlesubmitform}
+                className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white rounded-xl px-6 py-3 text-sm"
+              >
+                Create Account
+              </Button>
+
+              <div className="flex items-center gap-2 text-sm">
+                <span className="text-slate-500">Already have an account?</span>
+                <Link to="/auth/HR/login">
+                  <Button variant="outline" className="rounded-xl border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-4 py-2 text-sm h-auto">
+                    Sign In
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </>
+  );
+};

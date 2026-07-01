@@ -70,7 +70,7 @@ export const HRSignupPage = () => {
     // console.log(HRState)
 
     return (
-        <div className="HRsignup-page-container h-screen flex justify-center min-[900px]:justify-center min-[900px]:items-center">
+        <div className="HRsignup-page-container flex justify-center min-[900px]:justify-center min-[900px]:items-center">
             <LoadingBar ref={loadingbar} />
             <SignUP stateformdata={signupform} handlesignupform={handlesignupform} handlesubmitform={handlesubmitform} errorpopup={errorpopup} />
         </div>
