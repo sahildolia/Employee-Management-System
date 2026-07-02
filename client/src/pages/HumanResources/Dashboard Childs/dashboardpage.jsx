@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/dialog"
 import AddEmpModal from "../../../components/common/Dashboard/AddEmpModal.jsx";
 
-export const HRDashboardPage = ({formdata, handleformchange, }) => {
+export const HRDashboardPage = ({formdata, handleformchange}) => {
   const DashboardState = useSelector(
     (state) => state.dashboardreducer
   );
@@ -215,29 +215,6 @@ export const HRDashboardPage = ({formdata, handleformchange, }) => {
 
           <div className="space-y-3">
 
-            {/* <button
-              className="
-              w-full
-              flex
-              items-center
-              justify-between
-              p-4
-              rounded-2xl
-              bg-blue-50
-              hover:bg-blue-100
-              transition
-            "
-            >
-              <div className="flex items-center gap-3">
-                <UserPlus
-                  size={20}
-                  className="text-blue-600"
-                />
-                <span>Add Employee </span>
-              </div>
-
-              <ArrowRight size={18} />
-            </button> */}
 <Dialog>
   <DialogTrigger asChild>
     <button

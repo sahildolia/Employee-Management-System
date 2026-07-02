@@ -62,8 +62,6 @@ export const ListItems = ({ TargetedState }) => {
                     {item.contactnumber}
                 </div>
                 <div className="heading-content text-blue-800 font-bold min-[250px]:text-xs xl:text-lg p-2 rounded-lg text-center flex justify-center items-center min-[250px]:gap-1 xl:gap-2">
-                    {/* <EmployeeDetailsDialogBox EmployeeID={item._id} />
-                    <DeleteEmployeeDialogBox EmployeeID={item._id} /> */}
                     <DropdownMenu>
 
     <DropdownMenuTrigger asChild>

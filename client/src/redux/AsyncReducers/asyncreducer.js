@@ -106,9 +106,7 @@ export const HRAsyncReducer = (builder, thunk) => {
                 state.error.content = action.payload
             }
             if (action.payload.type == "HRcodeavailable") {
-                // state.isSignUp = true
                 state.isLoading = false;
-                // state.isAuthenticated = true
                 state.isVerified = false
                 state.isVerifiedEmailAvailable = false
                 state.error.status = false;
@@ -184,7 +182,6 @@ export const HREmployeesPageAsyncReducer = (builder, thunk) => {
         }
     })
     builder.addCase(thunk.rejected, (state, action) => {
-        console.log(action)
         state.isLoading = false;
         state.error.status = true;
         state.error.message = action.payload.message

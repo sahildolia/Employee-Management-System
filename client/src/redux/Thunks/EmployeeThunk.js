@@ -35,8 +35,3 @@ export const HandlePostEmployees = createAsyncThunk("HandlePostEmployees", async
     }
 })
 
-export const HandlePutEmployees = createAsyncThunk()
-
-export const HandlePatchEmployees = createAsyncThunk()
-
-export const HandleDeleteEmployees = createAsyncThunk()

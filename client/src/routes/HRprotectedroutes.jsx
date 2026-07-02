@@ -1,7 +1,6 @@
 import { HandleGetHumanResources } from "../redux/Thunks/HRThunk.js"
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState } from "react"
-import { Navigate } from "react-router-dom"
+import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { Loading } from "../components/common/loading.jsx"
 

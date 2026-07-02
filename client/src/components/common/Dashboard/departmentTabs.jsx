@@ -90,8 +90,6 @@ export const HRDepartmentTabs = () => {
             })
         }
 
-        console.log("test message")
-
     }, [HRDepartmentState.fetchData, HRDepartmentState.error, HRDepartmentState.success])
 
 
@@ -178,7 +176,6 @@ export const ComboDropDown = ({ DepartmentData, CurrentDepartment, SetCurrentDep
                                         key={department.value}
                                         value={department.value}
                                         onSelect={(currentValue) => {
-                                            console.log("this is the current value", currentValue)
                                             SetCurrentDepartment(currentValue === CurrentDepartment ? "All Departments" : currentValue)
                                             setOpen(false)
                                         }}

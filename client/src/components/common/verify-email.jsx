@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button"
 import {
     InputOTP,
     InputOTPGroup,
-    InputOTPSeparator,
     InputOTPSlot,
 } from "@/components/ui/input-otp"
 export const Verify_Email_Component = ({ value, handleCodeValue, handleOTPsubmit }) => {
@@ -22,8 +21,7 @@ export const Verify_Email_Component = ({ value, handleCodeValue, handleOTPsubmit
                             <InputOTPSlot index={3} className="border-2 border-blue-600" />
                             <InputOTPSlot index={4} className="border-2 border-blue-600" />
                             <InputOTPSlot index={5} className="border-2 border-blue-600" />
-                            {/* <InputOTPSlot index={6} />
-                        <InputOTPSlot index={7} /> */}
+
                         </InputOTPGroup>
                     </InputOTP>
                 </div>

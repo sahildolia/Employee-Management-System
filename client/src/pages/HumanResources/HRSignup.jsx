@@ -1,7 +1,6 @@
 import { SignUP } from "../../components/common/sign-up"
 import { useState, useEffect, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
-// import { HandlePostEmployees, HandleGetEmployees } from "../../redux/Thunks/EmployeeThunk.js"
 import LoadingBar from 'react-top-loading-bar'
 import { useNavigate } from 'react-router-dom'
 import { CommonStateHandler } from "../../utils/commonhandler.js"
@@ -61,13 +60,9 @@ export const HRSignupPage = () => {
 
         if (HRState.isAuthenticated && !HRState.isVerified) {
             loadingbar.current.complete()
-            // navigate("/auth/HR/verify-email")
             navigate("/HR/dashboard/dashboard-data")
         }
     }, [HRState.isAuthenticated, HRState.isVerified])
-
-    // console.log(signupform)
-    // console.log(HRState)
 
     return (
         <div className="HRsignup-page-container flex justify-center min-[900px]:justify-center min-[900px]:items-center">

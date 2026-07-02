@@ -1,11 +1,10 @@
 import { ResetVerifyEmailPage } from "../common/verify-email"
-import { SignIn } from "../../components/common/sign-in.jsx"
 import { useSelector, useDispatch } from "react-redux"
 import { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import LoadingBar from 'react-top-loading-bar'
 import { CommonStateHandler } from "../../utils/commonhandler.js"
-import { HandleGetHumanResources, HandlePostHumanResources } from "../../redux/Thunks/HRThunk.js"
+import { HandlePostHumanResources } from "../../redux/Thunks/HRThunk.js"
 export const ResetHRVerifyEmailPage = () => {
     const HRState = useSelector((state) => state.HRReducer)
     const dispatch = useDispatch()
@@ -39,8 +38,6 @@ export const ResetHRVerifyEmailPage = () => {
             navigate("/auth/HR/verify-email")
         }
     }, [HRState.isVerified, HRState.isVerifiedEmailAvailable])
-
-    console.log(HRState)
 
     return (
         <>

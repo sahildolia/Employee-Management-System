@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom"
 import { ErrorPopup } from "./error-popup"
-import { useSelector } from "react-redux"
 export const Reset_Password = ({ handlepasswordsubmit, handlepasswordform, passworderror, targetstate }) => { 
     return (
         <>
@@ -30,7 +28,6 @@ export const Reset_Password = ({ handlepasswordsubmit, handlepasswordform, passw
                                     name="password"
                                     type="text"
                                     required
-                                    // autoComplete="email"
                                     onChange={handlepasswordform}
                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 p-2"
                                 />
@@ -42,13 +39,7 @@ export const Reset_Password = ({ handlepasswordsubmit, handlepasswordform, passw
                                 <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
                                     Repeat Password
                                 </label>
-                                {/* <div className="text-sm">
-                                        <Link to={"/forgot-password"}>
-                                            <a className="font-semibold text-indigo-600 hover:text-indigo-500">
-                                                Forgot password?
-                                            </a>
-                                        </Link>
-                                    </div> */}
+
                             </div>
                             <div className="mt-2">
                                 <input

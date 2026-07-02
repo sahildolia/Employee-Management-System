@@ -35,9 +35,3 @@ export const HandlePostHumanResources = createAsyncThunk("HandlePostHumanResourc
         return rejectWithValue(error.response.data);
     }
 })
-
-export const HandlePutHumanResources = createAsyncThunk("HandlePutHumanResources", async (HRData, { rejectWithValue }) => { })
-
-export const HandlePatchHumanResources = createAsyncThunk("HandlePutHumanResources", async (HRData, { rejectWithValue }) => { })
-
-export const HandleDeleteHumanResources = createAsyncThunk("HandlePutHumanResources", async (HRData, { rejectWithValue }) => { })

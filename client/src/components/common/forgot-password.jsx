@@ -1,5 +1,4 @@
 import { ErrorPopup } from "./error-popup"
-import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
 export const ForgotPassowrd = ({ handleforgotpasswordsubmit, handlesforgotpasswordform, targetState, redirectpath }) => {

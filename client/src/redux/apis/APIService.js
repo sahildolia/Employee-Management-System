@@ -6,4 +6,3 @@ export const apiService = axios.create({
     'Content-Type': 'application/json',
   },
 });
-console.log("API URL:", import.meta.env.VITE_EMPLOYEE_API);

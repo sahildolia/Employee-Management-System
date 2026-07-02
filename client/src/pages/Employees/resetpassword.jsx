@@ -1,8 +1,7 @@
 import { Reset_Password } from "../../components/common/reset-password.jsx"
 import { useState, useEffect, useRef } from "react"
-import { SignIn } from "../../components/common/sign-in.jsx"
 import { useDispatch, useSelector } from "react-redux"
-import { HandlePostEmployees, HandleGetEmployees } from "../../redux/Thunks/EmployeeThunk.js"
+import { HandlePostEmployees } from "../../redux/Thunks/EmployeeThunk.js"
 import LoadingBar from 'react-top-loading-bar'
 import { useNavigate, useParams } from 'react-router-dom'
 export const ResetPassword = () => {

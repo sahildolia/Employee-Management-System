@@ -1,8 +1,6 @@
 import { Reset_Password } from "../../components/common/reset-password.jsx"
 import { useState, useEffect, useRef } from "react"
-// import { SignIn } from "../../components/common/sign-in.jsx"
 import { useDispatch, useSelector } from "react-redux"
-// import { HandlePostEmployees, HandleGetEmployees } from "../../redux/Thunks/EmployeeThunk.js"
 import { HandlePostHumanResources } from "../../redux/Thunks/HRThunk.js"
 import LoadingBar from 'react-top-loading-bar'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -48,8 +46,6 @@ export const ResetHRPasswordPage = () => {
             navigate("/auth/HR/login")
         }
     }, [HRState.isResetPassword])
-
-    console.log(HRState)
 
     return (
         <div className="reset-password-container">

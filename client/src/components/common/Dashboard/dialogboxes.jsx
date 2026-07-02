@@ -260,7 +260,6 @@ export const CreateDepartmentDialogBox = ({ children }) => {
 
 
 export const EmployeesIDSDialogBox = ({ DepartmentID }) => {
-    console.log("this is Department ID", DepartmentID)
     const EmployeesIDState = useSelector((state) => state.EMployeesIDReducer)
     const dispatch = useDispatch()
     const [SelectedEmployeesData, Set_selectedEmployeesData] = useState({
@@ -288,8 +287,6 @@ export const EmployeesIDSDialogBox = ({ DepartmentID }) => {
         dispatch(HandlePatchHRDepartments({ apiroute: "UPDATE", data: SelectedEmployeesData }))
         ClearSelectedEmployeesData()
     }
-
-    console.log(SelectedEmployeesData)
 
     useEffect(() => {
         Set_selectedEmployeesData(

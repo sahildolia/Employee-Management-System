@@ -1,6 +1,4 @@
 import { HRDepartmentTabs } from "../../../components/common/Dashboard/departmenttabs"
-import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState } from "react"
 import { CreateDepartmentDialogBox } from "../../../components/common/Dashboard/dialogboxes"
 export const HRDepartmentPage = () => {
     return (
