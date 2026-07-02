@@ -189,7 +189,7 @@ export const CreateSalaryDialogBox = ({ children }) => {
     )
 }
 
-export const UpdateSalaryDialogBox = ({ salaryData }) => {
+export const UpdateSalaryDialogBox = ({ salaryData, children }) => {
     const dispatch = useDispatch()
     const [formdata, setformdata] = useState({
         salaryID: salaryData._id,
@@ -223,9 +223,12 @@ export const UpdateSalaryDialogBox = ({ salaryData }) => {
 
     return (
         <Dialog>
-            <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">
+            {/* <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">
                 Edit
-            </DialogTrigger>
+            </DialogTrigger> */}
+                                <DialogTrigger asChild>
+    {children}
+</DialogTrigger>
             <DialogContent className="max-w-[95vw] lg:max-w-[50vw] 2xl:max-w-[40vw]">
                 <div className="update-salary-container flex flex-col gap-5">
                     <div className="heading">
@@ -297,12 +300,12 @@ export const UpdateSalaryDialogBox = ({ salaryData }) => {
     )
 }
 
-export const ViewSalaryDialogBox = ({ salaryData }) => {
+export const ViewSalaryDialogBox = ({ salaryData, children }) => {
     return (
         <Dialog>
-            <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">
-                View
-            </DialogTrigger>
+                    <DialogTrigger asChild>
+    {children}
+</DialogTrigger>
             <DialogContent className="max-w-[95vw] lg:max-w-[50vw] 2xl:max-w-[40vw]">
                 <div className="salary-data-container flex flex-col gap-4">
                     <div className="employee-profile-logo flex items-center gap-3">
@@ -361,7 +364,7 @@ export const ViewSalaryDialogBox = ({ salaryData }) => {
     )
 }
 
-export const DeleteSalaryDialogBox = ({ salaryID }) => {
+export const DeleteSalaryDialogBox = ({ salaryID, children }) => {
     const dispatch = useDispatch()
 
     const DeleteSalary = (SID) => {
@@ -370,9 +373,9 @@ export const DeleteSalaryDialogBox = ({ salaryID }) => {
 
     return (
         <Dialog>
-            <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">
-                Delete
-            </DialogTrigger>
+                    <DialogTrigger asChild>
+    {children}
+</DialogTrigger>
             <DialogContent className="max-w-[95vw] lg:max-w-[35vw] 2xl:max-w-[30vw]">
                 <div className="flex flex-col justify-center items-center gap-4">
                     <p className="text-lg font-bold min-[250px]:text-center">Are you sure you want to delete this salary record?</p>

@@ -1,5 +1,12 @@
 import { ViewEventDialogBox, UpdateEventDialogBox, DeleteEventDialogBox } from "./calendardialogboxes.jsx"
+import {
+    DropdownMenu,
+    DropdownMenuTrigger,
+    DropdownMenuContent,
+    DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
 
+import { MoreVertical } from "lucide-react";
 export const CalendarListItems = ({ TargetedState }) => {
     return (
         <>
@@ -20,9 +27,53 @@ export const CalendarListItems = ({ TargetedState }) => {
                         {item.description ? (item.description.length > 30 ? `${item.description.slice(0, 30)}...` : item.description) : "N/A"}
                     </div>
                     <div className="heading-content text-blue-800 font-bold min-[250px]:text-xs xl:text-lg p-2 rounded-lg text-center flex justify-center items-center min-[250px]:gap-1 xl:gap-2">
-                        <ViewEventDialogBox eventData={item} />
-                        <UpdateEventDialogBox eventData={item} />
-                        <DeleteEventDialogBox eventID={item._id} />
+                      <DropdownMenu>
+
+    <DropdownMenuTrigger asChild>
+        <button
+            className="
+                h-9
+                w-9
+                flex
+                items-center
+                justify-center
+                rounded-lg
+                border
+                border-slate-300
+                hover:bg-slate-100
+                transition
+            "
+        >
+            <MoreVertical size={18} />
+        </button>
+    </DropdownMenuTrigger>
+
+    <DropdownMenuContent align="end">
+
+        <ViewEventDialogBox eventData={item}>
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                👁 View
+            </DropdownMenuItem>
+        </ViewEventDialogBox>
+
+        <UpdateEventDialogBox eventData={item}>
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                ✏️ Update
+            </DropdownMenuItem>
+        </UpdateEventDialogBox>
+
+        <DeleteEventDialogBox eventID={item._id}>
+            <DropdownMenuItem
+                onSelect={(e) => e.preventDefault()}
+                className="text-red-600"
+            >
+                🗑 Delete
+            </DropdownMenuItem>
+        </DeleteEventDialogBox>
+
+    </DropdownMenuContent>
+
+</DropdownMenu>
                     </div>
                 </div>
             )) : (

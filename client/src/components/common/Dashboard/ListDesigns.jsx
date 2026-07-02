@@ -1,7 +1,14 @@
 import { EmployeeDetailsDialogBox } from "./dialogboxes.jsx"
 import { DeleteEmployeeDialogBox } from "./dialogboxes.jsx"
 import { RemoveEmployeeFromDepartmentDialogBox } from "./dialogboxes.jsx"
+import {
+    DropdownMenu,
+    DropdownMenuTrigger,
+    DropdownMenuContent,
+    DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
 
+import { MoreVertical } from "lucide-react";
 export const ListWrapper = ({ children }) => {
     return (
         <div className={`wrapper-container p-2 border-2 border-blue-700 rounded-lg w-auto`}>
@@ -55,8 +62,55 @@ export const ListItems = ({ TargetedState }) => {
                     {item.contactnumber}
                 </div>
                 <div className="heading-content text-blue-800 font-bold min-[250px]:text-xs xl:text-lg p-2 rounded-lg text-center flex justify-center items-center min-[250px]:gap-1 xl:gap-2">
-                    <EmployeeDetailsDialogBox EmployeeID={item._id} />
-                    <DeleteEmployeeDialogBox EmployeeID={item._id} />
+                    {/* <EmployeeDetailsDialogBox EmployeeID={item._id} />
+                    <DeleteEmployeeDialogBox EmployeeID={item._id} /> */}
+                    <DropdownMenu>
+
+    <DropdownMenuTrigger asChild>
+
+        <button
+            className="
+                h-9
+                w-9
+                flex
+                items-center
+                justify-center
+                rounded-lg
+                border
+                border-slate-300
+                hover:bg-slate-100
+                transition
+            "
+        >
+            <MoreVertical size={18} />
+        </button>
+
+    </DropdownMenuTrigger>
+
+    <DropdownMenuContent align="end">
+
+        <EmployeeDetailsDialogBox EmployeeID={item._id}>
+
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                👁 View
+            </DropdownMenuItem>
+
+        </EmployeeDetailsDialogBox>
+
+        <DeleteEmployeeDialogBox EmployeeID={item._id}>
+
+            <DropdownMenuItem
+                onSelect={(e) => e.preventDefault()}
+                className="text-red-600"
+            >
+                🗑 Delete
+            </DropdownMenuItem>
+
+        </DeleteEmployeeDialogBox>
+
+    </DropdownMenuContent>
+
+</DropdownMenu>
                 </div>
             </div>) : null}
         </>

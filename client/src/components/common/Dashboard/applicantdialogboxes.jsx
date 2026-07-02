@@ -6,6 +6,14 @@ import {
     DialogClose,
     DialogTrigger,
 } from "@/components/ui/dialog"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+import { MoreVertical } from "lucide-react";
 import { Button } from "@/components/ui/button"
 import { useState, useEffect } from "react"
 import { CommonStateHandler } from "../../../utils/commonhandler.js"
@@ -164,12 +172,15 @@ export const CreateApplicantDialogBox = ({ children, recruitmentID }) => {
     )
 }
 
-export const ViewApplicantDialogBox = ({ applicantData }) => {
+export const ViewApplicantDialogBox = ({ applicantData, children }) => {
     return (
         <Dialog>
-            <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">
+            {/* <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">
                 View
-            </DialogTrigger>
+            </DialogTrigger> */}
+            <DialogTrigger asChild>
+    {children}
+</DialogTrigger>
             <DialogContent className="max-w-[95vw] lg:max-w-[50vw] 2xl:max-w-[40vw]">
                 <div className="applicant-data-container flex flex-col gap-4">
                     <div className="employee-profile-logo flex items-center gap-3">
@@ -212,7 +223,7 @@ export const ViewApplicantDialogBox = ({ applicantData }) => {
     )
 }
 
-export const UpdateApplicantStatusDialogBox = ({ applicantData }) => {
+export const UpdateApplicantStatusDialogBox = ({ applicantData,  children }) => {
     const dispatch = useDispatch()
     const { toast } = useToast()
     const [open, setOpen] = useState(false)
@@ -240,9 +251,12 @@ export const UpdateApplicantStatusDialogBox = ({ applicantData }) => {
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">
+            {/* <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">
                 Update Status
-            </DialogTrigger>
+            </DialogTrigger> */}
+            <DialogTrigger asChild>
+    {children}
+</DialogTrigger>
             <DialogContent className="max-w-[95vw] lg:max-w-[40vw] 2xl:max-w-[35vw]">
                 <div className="flex flex-col gap-5">
                     <h1 className="font-bold text-2xl">Update Applicant Status</h1>
@@ -268,7 +282,7 @@ export const UpdateApplicantStatusDialogBox = ({ applicantData }) => {
     )
 }
 
-export const DeleteApplicantDialogBox = ({ applicantID }) => {
+export const DeleteApplicantDialogBox = ({ applicantID, children }) => {
     const dispatch = useDispatch()
     const { toast } = useToast()
 
@@ -284,9 +298,12 @@ export const DeleteApplicantDialogBox = ({ applicantID }) => {
 
     return (
         <Dialog>
-            <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">
-                Delete
-            </DialogTrigger>
+            {/* <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">
+                Delete 
+            </DialogTrigger> */}
+            <DialogTrigger asChild>
+    {children}
+</DialogTrigger>
             <DialogContent className="max-w-[95vw] lg:max-w-[35vw] 2xl:max-w-[30vw]">
                 <div className="flex flex-col justify-center items-center gap-4">
                     <p className="text-lg font-bold min-[250px]:text-center">Are you sure you want to delete this applicant?</p>

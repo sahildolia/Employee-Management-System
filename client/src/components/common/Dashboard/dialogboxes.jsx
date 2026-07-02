@@ -60,79 +60,14 @@ export const AddEmployeesDialogBox = () => {
               transition
             ">Add Employees</DialogTrigger>
              <AddEmpModal formdata={formdata} handleformchange={handleformchange}/>
-                {/* <DialogContent className="max-w-[95vw] sm:max-w-[50vw] 2xl:max-w-[45vw]">
-                    <div className="add-employees-container flex flex-col gap-5">
-                        <div className="heading">
-                            <h1 className="font-bold text-2xl">Add Employee Info</h1>
-                        </div>
-                        <div className="form-container grid md:grid-cols-2 min-[250px]:grid-cols-1 gap-4">
-                            <div className="form-group flex flex-col gap-3">
-                                <div className="label-input-field flex flex-col gap-1">
-                                    <label htmlFor="firstname" className="md:text-md lg:text-lg font-bold">First Name</label>
-                                    <input type="text"
-                                        id="firstname"
-                                        className="border-2 border-gray-700 rounded px-2 py-1"
-                                        name="firstname"
-                                        value={formdata.firstname}
-                                        onChange={handleformchange} />
-                                </div>
-                                <div className="label-input-field flex flex-col gap-1">
-                                    <label htmlFor="lastname" className="md:text-md lg:text-lg font-bold">Last Name</label>
-                                    <input type="text"
-                                        id="lastanme"
-                                        className="border-2 border-gray-700 rounded px-2 py-1"
-                                        name="lastname"
-                                        value={formdata.lastname}
-                                        onChange={handleformchange} />
-                                </div>
-                                <div className="label-input-field flex flex-col gap-1">
-                                    <label htmlFor="email" className="md:text-md lg:text-lg font-bold">Email</label>
-                                    <input type="email"
-                                        id="email" required={true} className="border-2 border-gray-700 rounded px-2 py-1"
-                                        name="email"
-                                        value={formdata.email}
-                                        onChange={handleformchange} />
-                                </div>
-                            </div>
-                            <div className="form-group flex flex-col gap-3">
-                                <div className="label-input-field flex flex-col gap-1">
-                                    <label htmlFor="contactnumber" className="md:text-md lg:text-lg font-bold">Contact Number</label>
-                                    <input type="number"
-                                        id="contactnumber" className="border-2 border-gray-700 rounded px-2 py-1"
-                                        name="contactnumber"
-                                        value={formdata.contactnumber}
-                                        onChange={handleformchange} />
-                                </div>
-                                <div className="label-input-field flex flex-col gap-1">
-                                    <label htmlFor="text-password" className="md:text-md lg:text-lg font-bold">Password</label>
-                                    <input type="text"
-                                        id="text-password" className="border-2 border-gray-700 rounded px-2 py-1"
-                                        name="textpassword"
-                                        value={formdata.textpassword}
-                                        onChange={handleformchange} />
-                                </div>
-                                <div className="label-input-field flex flex-col gap-1">
-                                    <label htmlFor="password" className="md:text-md lg:text-lg font-bold">Confirm Password</label>
-                                    <input type="password"
-                                        id="password" required={true} className="border-2 border-gray-700 rounded px-2 py-1"
-                                        name="password"
-                                        value={formdata.password}
-                                        onChange={handleformchange} />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="add-button flex items-center justify-center">
-                            <FormSubmitToast formdata={formdata} />
-                        </div>
-                    </div>
-                </DialogContent> */}
+                
                
             </Dialog>
         </div>
     )
 }
 
-export const EmployeeDetailsDialogBox = ({ EmployeeID }) => {
+export const EmployeeDetailsDialogBox = ({ EmployeeID, children }) => {
     const HREmployeesState = useSelector((state) => state.HREmployeesPageReducer)
     const FetchEmployeeData = (EmID) => {
         const employee = HREmployeesState.data.find((item) => item._id === EmID)
@@ -143,7 +78,10 @@ export const EmployeeDetailsDialogBox = ({ EmployeeID }) => {
         <div className="Employees-Details-container">
             <Dialog>
                 <div>
-                    <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">View</DialogTrigger>
+                    {/* <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">View</DialogTrigger> */}
+                    <DialogTrigger asChild>
+    {children}
+</DialogTrigger>
                 </div>
                 <DialogContent className="max-w-[95vw] lg:max-w-[55vw] 2xl:max-w-[45vw]">
                     <div className="employee-data-container flex flex-col gap-4">
@@ -209,7 +147,7 @@ export const EmployeeDetailsDialogBox = ({ EmployeeID }) => {
 }
 
 
-export const DeleteEmployeeDialogBox = ({ EmployeeID }) => {
+export const DeleteEmployeeDialogBox = ({ EmployeeID , children }) => {
     const dispatch = useDispatch()
     const DeleteEmployee = (EMID) => {
         dispatch(HandleDeleteHREmployees({ apiroute: `DELETE.${EMID}` }))
@@ -217,7 +155,10 @@ export const DeleteEmployeeDialogBox = ({ EmployeeID }) => {
     return (
         <div className="delete-employee-dialog-container">
             <Dialog>
-                <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">Delete</DialogTrigger>
+                {/* <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">Delete</DialogTrigger> */}
+                    <DialogTrigger asChild>
+    {children}
+</DialogTrigger>
                 <DialogContent className="max-w-[95vw] lg:max-w-[35vw] 2xl:max-w-[30vw]">
                     <div className="flex flex-col justify-center items-center gap-4">
                         <p className="text-lg font-bold min-[250px]:text-center">Are you sure you want to delete this employee?</p>

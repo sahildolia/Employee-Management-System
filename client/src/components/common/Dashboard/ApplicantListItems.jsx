@@ -1,5 +1,11 @@
 import { ViewApplicantDialogBox, UpdateApplicantStatusDialogBox, DeleteApplicantDialogBox } from "./applicantdialogboxes.jsx"
-
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import { MoreVertical } from "lucide-react";
 export const ApplicantListItems = ({ TargetedState }) => {
     return (
         <>
@@ -23,9 +29,58 @@ export const ApplicantListItems = ({ TargetedState }) => {
                         </span>
                     </div>
                     <div className="heading-content text-blue-800 font-bold min-[250px]:text-xs xl:text-lg p-2 rounded-lg text-center flex justify-center items-center min-[250px]:gap-1 xl:gap-2">
-                        <ViewApplicantDialogBox applicantData={item} />
+                        {/* <ViewApplicantDialogBox applicantData={item} />
                         <UpdateApplicantStatusDialogBox applicantData={item} />
-                        <DeleteApplicantDialogBox applicantID={item._id} />
+                        <DeleteApplicantDialogBox applicantID={item._id} /> */}
+                        <DropdownMenu>
+
+    <DropdownMenuTrigger asChild>
+
+        <button
+            className="
+                h-9
+                w-9
+                flex
+                items-center
+                justify-center
+                rounded-lg
+                border
+                border-slate-300
+                hover:bg-slate-100
+                transition
+            "
+        >
+            <MoreVertical size={18} />
+        </button>
+
+    </DropdownMenuTrigger>
+
+    <DropdownMenuContent align="end">
+
+        <ViewApplicantDialogBox applicantData={item}>
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                👁 View
+            </DropdownMenuItem>
+        </ViewApplicantDialogBox>
+
+        <UpdateApplicantStatusDialogBox applicantData={item}>
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                ✏ Update Status
+            </DropdownMenuItem>
+        </UpdateApplicantStatusDialogBox>
+
+        <DeleteApplicantDialogBox applicantID={item._id}>
+            <DropdownMenuItem
+                onSelect={(e) => e.preventDefault()}
+                className="text-red-600"
+            >
+                🗑 Delete
+            </DropdownMenuItem>
+        </DeleteApplicantDialogBox>
+
+    </DropdownMenuContent>
+
+</DropdownMenu>
                     </div>
                 </div>
             )) : (

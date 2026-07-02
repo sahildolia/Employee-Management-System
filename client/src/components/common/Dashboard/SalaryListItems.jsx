@@ -1,5 +1,12 @@
 import { ViewSalaryDialogBox, UpdateSalaryDialogBox, DeleteSalaryDialogBox } from "./salarydialogboxes.jsx"
+import {
+    DropdownMenu,
+    DropdownMenuTrigger,
+    DropdownMenuContent,
+    DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
 
+import { MoreVertical } from "lucide-react";
 export const SalaryListItems = ({ TargetedState }) => {
     return (
         <>
@@ -20,9 +27,82 @@ export const SalaryListItems = ({ TargetedState }) => {
                         </span>
                     </div>
                     <div className="heading-content text-blue-800 font-bold min-[250px]:text-xs xl:text-lg p-2 rounded-lg text-center flex justify-center items-center min-[250px]:gap-1 xl:gap-2">
-                        <ViewSalaryDialogBox salaryData={item} />
+                        {/* <ViewSalaryDialogBox salaryData={item} />
                         <UpdateSalaryDialogBox salaryData={item} />
-                        <DeleteSalaryDialogBox salaryID={item._id} />
+                        <DeleteSalaryDialogBox salaryID={item._id} /> */}
+                        <DropdownMenu>
+
+    <DropdownMenuTrigger asChild>
+
+        <button
+            className="
+                h-9
+                w-9
+                flex
+                items-center
+                justify-center
+                rounded-lg
+                border
+                border-slate-300
+                hover:bg-slate-100
+                transition
+            "
+        >
+            <MoreVertical size={18} />
+        </button>
+
+    </DropdownMenuTrigger>
+
+    <DropdownMenuContent align="end">
+
+        <ViewSalaryDialogBox salaryData={item}>
+
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                👁 View
+            </DropdownMenuItem>
+
+        </ViewSalaryDialogBox>
+
+        <DeleteSalaryDialogBox salaryID={item._id}>
+
+            <DropdownMenuItem
+                onSelect={(e) => e.preventDefault()}
+                className="text-red-600"
+            >
+                🗑 Delete
+            </DropdownMenuItem>
+
+        </DeleteSalaryDialogBox>
+
+    </DropdownMenuContent>
+    <DropdownMenuContent align="end">
+
+        <ViewSalaryDialogBox salaryData={item}>
+
+            {/* <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                👁 View
+            </DropdownMenuItem> */}
+        <UpdateSalaryDialogBox salaryData={item}>
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                ✏ Update Status
+            </DropdownMenuItem>
+        </UpdateSalaryDialogBox>
+        </ViewSalaryDialogBox>
+
+        <DeleteSalaryDialogBox salaryID={item._id}>
+
+            <DropdownMenuItem
+                onSelect={(e) => e.preventDefault()}
+                className="text-red-600"
+            >
+                🗑 Delete
+            </DropdownMenuItem>
+
+        </DeleteSalaryDialogBox>
+
+    </DropdownMenuContent>
+
+</DropdownMenu>
                     </div>
                 </div>
             )) : null}

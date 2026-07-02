@@ -121,12 +121,10 @@ export const CreateAttendanceDialogBox = ({ children }) => {
     )
 }
 
-export const ViewAttendanceDialogBox = ({ attendanceData }) => {
+export const ViewAttendanceDialogBox = ({ attendanceData, children }) => {
     return (
         <Dialog>
-            <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">
-                View Details
-            </DialogTrigger>
+            <DialogTrigger asChild>{children}</DialogTrigger>
             <DialogContent className="max-w-[95vw] lg:max-w-[55vw] 2xl:max-w-[45vw]">
                 <div className="attendance-data-container flex flex-col gap-4">
                     <div className="employee-profile-logo flex items-center gap-3">
@@ -182,7 +180,7 @@ export const ViewAttendanceDialogBox = ({ attendanceData }) => {
     )
 }
 
-export const DeleteAttendanceDialogBox = ({ attendanceID }) => {
+export const DeleteAttendanceDialogBox = ({ attendanceID, children }) => {
     const dispatch = useDispatch()
     const { toast } = useToast()
 
@@ -198,9 +196,7 @@ export const DeleteAttendanceDialogBox = ({ attendanceID }) => {
 
     return (
         <Dialog>
-            <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">
-                Delete
-            </DialogTrigger>
+            <DialogTrigger asChild>{children}</DialogTrigger>
             <DialogContent className="max-w-[95vw] lg:max-w-[35vw] 2xl:max-w-[30vw]">
                 <div className="flex flex-col justify-center items-center gap-4">
                     <p className="text-lg font-bold min-[250px]:text-center">Are you sure you want to delete this attendance record?</p>

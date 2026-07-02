@@ -146,12 +146,10 @@ export const CreateInterviewDialogBox = ({ children }) => {
     )
 }
 
-export const ViewInterviewDialogBox = ({ interviewData }) => {
+export const ViewInterviewDialogBox = ({ interviewData, children }) => {
     return (
         <Dialog>
-            <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">
-                View
-            </DialogTrigger>
+                <DialogTrigger asChild>{children}</DialogTrigger>
             <DialogContent className="max-w-[95vw] lg:max-w-[50vw] 2xl:max-w-[40vw]">
                 <div className="interview-data-container flex flex-col gap-4">
                     <div className="heading">
@@ -197,7 +195,7 @@ export const ViewInterviewDialogBox = ({ interviewData }) => {
     )
 }
 
-export const UpdateInterviewDialogBox = ({ interviewData }) => {
+export const UpdateInterviewDialogBox = ({ interviewData, children }) => {
     const dispatch = useDispatch()
     const { toast } = useToast()
     const [open, setOpen] = useState(false)
@@ -236,9 +234,10 @@ export const UpdateInterviewDialogBox = ({ interviewData }) => {
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">
+            {/* <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">
                 Feedback
-            </DialogTrigger>
+            </DialogTrigger> */}
+                 <DialogTrigger asChild>{children}</DialogTrigger>
             <DialogContent className="max-w-[95vw] lg:max-w-[50vw] 2xl:max-w-[40vw]">
                 <div className="update-interview-container flex flex-col gap-5">
                     <div className="heading">
@@ -280,7 +279,7 @@ export const UpdateInterviewDialogBox = ({ interviewData }) => {
     )
 }
 
-export const DeleteInterviewDialogBox = ({ interviewID }) => {
+export const DeleteInterviewDialogBox = ({ interviewID, children }) => {
     const dispatch = useDispatch()
     const { toast } = useToast()
 
@@ -296,9 +295,10 @@ export const DeleteInterviewDialogBox = ({ interviewID }) => {
 
     return (
         <Dialog>
-            <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">
+            {/* <DialogTrigger className="btn-sm btn-blue-700 text-md border-2 border-blue-800 min-[250px]:px-2 min-[250px]:py-1 sm:px-1 sm:py-0.5 xl:px-2 xl:py-1 rounded-md hover:bg-blue-800 hover:text-white">
                 Delete
-            </DialogTrigger>
+            </DialogTrigger> */}
+                 <DialogTrigger asChild>{children}</DialogTrigger>
             <DialogContent className="max-w-[95vw] lg:max-w-[35vw] 2xl:max-w-[30vw]">
                 <div className="flex flex-col justify-center items-center gap-4">
                     <p className="text-lg font-bold min-[250px]:text-center">Are you sure you want to delete this interview?</p>
